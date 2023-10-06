@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/design_default_color_primary">
+            <!--      <LinearLayout-->
+            <!--          android:layout_width="match_parent"-->
+            <!--          android:layout_height="wrap_content"-->
+            <!--          ></LinearLayout>-->
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textStyle="bold"
+        android:textSize="50dp"
+        android:text="Logged in"
+        android:gravity="center_horizontal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <EditText
+                android:id="@+id/numb_rows"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="160dp"
+
+                android:layout_marginRight="20dp"
+                android:hint="enter a value"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/getrec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="get data" />
+        </LinearLayout>
+
+
+        <TableLayout
+            android:id="@+id/table_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:text="DATA"
+               android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="35dp"
+                android:gravity="center_horizontal" />
+            <TableRow
+                android:id="@+id/tbrow">
+                <TextView
+
+                    android:text="hello"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginLeft="80dp"/>
+                <TextView android:text="hello"
+                    android:layout_marginRight="40dp"/>
+                <TextView android:text="hello"
+                    android:layout_marginRight="40dp"/>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="hello"
+                    android:layout_marginLeft="80dp"/>
+                <TextView android:text="hello" />
+                <TextView android:text="hello" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView android:text="hello"
+                    android:layout_marginLeft="80dp"/>
+                <TextView android:text="hello" />
+                <TextView android:text="hello" />
+            </TableRow>
+
+        </TableLayout>
+    </LinearLayout>
+
+</LinearLayout>
