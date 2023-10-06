@@ -1,32 +1,24 @@
 package com.example.gndectouch;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.mongodb.lang.NonNull;
+
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
 import io.realm.mongodb.User;
 
-import android.widget.Toast;
-
 
 public class MainActivity extends AppCompatActivity {
-
-
     String Appid="application-0-kdmkx";
     String url="mongodb+srv://monika8427084:123@cluster0.r7gdsrb.mongodb.net/";
     @Override
@@ -39,9 +31,26 @@ public class MainActivity extends AppCompatActivity {
         email=findViewById(R.id.emailinput);
         password=findViewById(R.id.passinput);
         // TODO Auto-generated method stub
+
         //real mongodb
         Realm.init(this);
 
+        // MongoClient mongoClient = (MongoClient) MongoClients.create(url);
+        // MongoDatabase database = mongoClient.getDatabase("GNDECdb");
+
+        Button guest=findViewById(R.id.guest);
+        guest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   MongoCollection<Document> collection = database.getCollection("Faculity");
+
+                // Create a document to insert
+               // Document document = new Document("email","luch@mail.com");
+
+                // Insert the document
+               // collection.insertOne(document);
+            }
+        });
         log.setOnClickListener(
                 new View.OnClickListener() {
 
@@ -59,10 +68,11 @@ public class MainActivity extends AppCompatActivity {
                         //                      --> id else mentee
                         //                       -->if else mentor
                         //                       --> else(without login)
+
                         Credentials credentials=Credentials.emailPassword(e,p);
                         app.loginAsync(credentials, new App.Callback<User>() {
                             @Override
-                            public void onResult(App.Result<User> result) {
+                            public void onResult(@NonNull App.Result<User> result) {
                                 if(result.isSuccess())
                                 {
 
