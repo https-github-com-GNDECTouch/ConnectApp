@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
 
         Realm.init(this);
+
+
+
+
+
         App app=new App(new AppConfiguration.Builder(Appid).build());
 
         Button guest=findViewById(R.id.guest);
@@ -105,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
 //                               }
 //
 //                       });
-                          app.loginAsync(credentials, new App.Callback<User>() {
+               
+                          app.loginAsync(Credentials.anonymous(), new App.Callback<User>() {
                             @Override
                             public void onResult( App.Result<User> result) {
                                 if(result.isSuccess())
@@ -118,18 +124,38 @@ public class MainActivity extends AppCompatActivity {
 //                                    startActivity(intent);
 
                                     MongoCollection<Document> mongoCollection=mongoDatabase.getCollection("Faculity");
-                                    mongoCollection.insertOne(new Document("userid",user.getId()).append("data","hello dude")).getAsync(result1 -> {
+
+
+                                    try {
+                                        mongoCollection.insertOne(new Document("userid",user.getId()).append("data","anonymous hu kya kr logy")).getAsync(result1 -> {
                                         if(result1.isSuccess())
                                         {
                                             Toast.makeText(MainActivity.this, "HELLO MONIKA", Toast.LENGTH_SHORT).show();
+
                                         }
                                         else {
                                             Toast.makeText(MainActivity.this, "dont allow", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                                        Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
+                                        startActivity(intent);
+                                        intent.putExtra("data", mongoCollection.count().toString());
 
-                                    Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
-                                    startActivity(intent);
+                                    } catch (Exception ex) {
+                                        throw new RuntimeException(ex);
+                                    }
+//                                    mongoCollection.insertOne(new Document("userid",user.getId()).append("data","hello dude")).getAsync(result1 -> {
+//                                        if(result1.isSuccess())
+//                                        {
+//                                            Toast.makeText(MainActivity.this, "HELLO MONIKA", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                        else {
+//                                            Toast.makeText(MainActivity.this, "dont allow", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+
+
                                 }
                                 else{
                                      Toast.makeText(MainActivity.this, e+" "+p+"CHECK INTERNET", Toast.LENGTH_SHORT).show();

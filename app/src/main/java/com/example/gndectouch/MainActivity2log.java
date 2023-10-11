@@ -1,25 +1,15 @@
 package com.example.gndectouch;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import io.realm.Realm;
-import io.realm.mongodb.App;
-import io.realm.mongodb.AppConfiguration;
-import io.realm.mongodb.Credentials;
-import io.realm.mongodb.User;
-
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity2log extends AppCompatActivity {
 
@@ -37,6 +27,12 @@ public class MainActivity2log extends AppCompatActivity {
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tb.setTitle("Home");
+       TextView data1=(TextView) findViewById(R.id.data);
+        Intent intent = getIntent();
+
+// Retrieve a string data with the key "keyName"
+        String data = intent.getStringExtra("data");
+        data1.setText("data ji"+data);
 //        numbr=findViewById(R.id.numb_rows);
 //        getrec=findViewById(R.id.getrec);
 //        getrec.setOnClickListener(new View.OnClickListener() {
