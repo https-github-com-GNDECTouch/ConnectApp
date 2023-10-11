@@ -15,10 +15,12 @@ import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
+import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.MongoClient;
 import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //                       });
                
-                          app.loginAsync(Credentials.anonymous(), new App.Callback<User>() {
+                          app.loginAsync(credentials, new App.Callback<User>() {
                             @Override
                             public void onResult( App.Result<User> result) {
                                 if(result.isSuccess())
@@ -120,30 +122,45 @@ public class MainActivity extends AppCompatActivity {
                                     User user=app.currentUser();
                                     mongoClient=user.getMongoClient("mongodb-atlas");
                                     mongoDatabase=mongoClient.getDatabase("GNDECdb");
-                                    //mywebsite link so they can firstly recover their password from website
-//                                    startActivity(intent);
+//                                  mywebsite link so they can firstly recover their password from website
+//                                  startActivity(intent);
 
+                                    
+                                    
                                     MongoCollection<Document> mongoCollection=mongoDatabase.getCollection("Faculity");
 
-
-                                    try {
-                                        mongoCollection.insertOne(new Document("userid",user.getId()).append("data","anonymous hu kya kr logy")).getAsync(result1 -> {
-                                        if(result1.isSuccess())
+                                    RealmResultTask<MongoCursor<Document>> field=mongoCollection.find().iterator();
+                                    field.getAsync(result1 -> {
+                                        Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
+                                        String s="";
+                                        if(result.isSuccess())
                                         {
                                             Toast.makeText(MainActivity.this, "HELLO MONIKA", Toast.LENGTH_SHORT).show();
-
                                         }
-                                        else {
-                                            Toast.makeText(MainActivity.this, "dont allow", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                        Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
+                                        intent.putExtra("data",result.get().getId().toString());
                                         startActivity(intent);
-                                        intent.putExtra("data", mongoCollection.count().toString());
+                                        finish();
+                                    });
 
-                                    } catch (Exception ex) {
-                                        throw new RuntimeException(ex);
-                                    }
+
+//                                    try {
+//                                        mongoCollection.insertOne(new Document("userid",user.getId()).append("data","anonymous hu kya kr logy")).getAsync(result1 -> {
+//                                        if(result1.isSuccess())
+//                                        {
+//                                            Toast.makeText(MainActivity.this, "HELLO MONIKA", Toast.LENGTH_SHORT).show();
+//
+//                                        }
+//                                        else {
+//                                            Toast.makeText(MainActivity.this, "dont allow", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                        Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
+//                                        startActivity(intent);
+//                                        intent.putExtra("data", mongoCollection.count().toString());
+//
+//                                    } catch (Exception ex) {
+//                                        throw new RuntimeException(ex);
+//                                    }
 //                                    mongoCollection.insertOne(new Document("userid",user.getId()).append("data","hello dude")).getAsync(result1 -> {
 //                                        if(result1.isSuccess())
 //                                        {
@@ -163,10 +180,8 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
 
-                       //
-//                       Intent intent=new Intent(MainActivity2log.this,MainActivity.class);
-//                       startActivity(intent);
-//                       finish();
+
+
                     }
                 }
 
