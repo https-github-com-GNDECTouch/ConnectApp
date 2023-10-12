@@ -5,22 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.bson.Document;
 
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
-import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.MongoClient;
-import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
-import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,27 +38,104 @@ public class MainActivity extends AppCompatActivity {
 
         Realm.init(this);
 
-
-
-
+        //real work
+        //first connect with data base and check which login belong to faculity,mentor or mentee?
 
         App app=new App(new AppConfiguration.Builder(Appid).build());
+
+        log.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String e=email.getText().toString();
+                String p=password.getText().toString();
+                Credentials credentials=Credentials.emailPassword("monika8427084@gmail.com","Monika8427@#");
+
+                app.loginAsync(credentials,new App.Callback<User>(){
+
+                    @Override
+                    public void onResult(App.Result<User> result) {
+                        //if condition to check email belong to admin
+                        //check pass and call toast
+                        //Intent for Faculity Activity pass userid
+                        Intent intent=new Intent(MainActivity.this,FaculityActivity.class);
+                        startActivity(intent);
+
+
+
+
+
+                        //else if condition belong to mentor
+                        //check pass and call toast
+                        //Intent mentor activity pass userid
+
+
+
+                        //else check mentee
+                        //check pass and call toast
+                        //Intent mentee Activity pass userId
+
+
+
+
+                        //elsse break out of it logout with credential
+
+
+                        //
+                    }
+                });
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //test part
+
 
         Button guest=findViewById(R.id.guest);
 
 
 //login
-        log.setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-
-                        //instance of realm which is online placed
-
-                        //part of credential
-                        String e=email.getText().toString();
-                       String p=password.getText().toString();
+//        log.setOnClickListener(
+//                new View.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                        //instance of realm which is online placed
+//
+//                        //part of credential
+//                        String e=email.getText().toString();
+//                       String p=password.getText().toString();
                         //mongodb link 1. connect mongodb+srv://monika8427084:123@cluster0.r7gdsrb.mongodb.net/
                         //step2. click()-->
                         // -->admin mail--> if faculity --password --
@@ -72,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         //                       -->if else mentor
                         //                       --> else(without login)
                        // Credentials credentials=Credentials.anonymous();
-                       Credentials credentials=Credentials.emailPassword("monika8427084@gmail.com","Monika8427@#");
+           //            Credentials credentials=Credentials.emailPassword("monika8427084@gmail.com","Monika8427@#");
 //                       app.loginAsync(Credentials.anonymous(), new App.Callback<User>() {
 //                           @Override
 //                           public void onResult(App.Result<User> result) {
@@ -112,35 +183,35 @@ public class MainActivity extends AppCompatActivity {
 //                               }
 //
 //                       });
-               
-                          app.loginAsync(credentials, new App.Callback<User>() {
-                            @Override
-                            public void onResult( App.Result<User> result) {
-                                if(result.isSuccess())
-                                {
 
-                                    User user=app.currentUser();
-                                    mongoClient=user.getMongoClient("mongodb-atlas");
-                                    mongoDatabase=mongoClient.getDatabase("GNDECdb");
-//                                  mywebsite link so they can firstly recover their password from website
-//                                  startActivity(intent);
-
-                                    
-                                    
-                                    MongoCollection<Document> mongoCollection=mongoDatabase.getCollection("Faculity");
-
-                                    RealmResultTask<MongoCursor<Document>> field=mongoCollection.find().iterator();
-                                    field.getAsync(result1 -> {
-                                        Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
-                                        String s="";
-                                        if(result.isSuccess())
-                                        {
-                                            Toast.makeText(MainActivity.this, "HELLO MONIKA", Toast.LENGTH_SHORT).show();
-                                        }
-                                        intent.putExtra("data",result.get().getId().toString());
-                                        startActivity(intent);
-                                        finish();
-                                    });
+//                          app.loginAsync(credentials, new App.Callback<User>() {
+//                            @Override
+//                            public void onResult( App.Result<User> result) {
+//                                if(result.isSuccess())
+//                                {
+//
+//                                    User user=app.currentUser();
+//                                    mongoClient=user.getMongoClient("mongodb-atlas");
+//                                    mongoDatabase=mongoClient.getDatabase("GNDECdb");
+////                                  mywebsite link so they can firstly recover their password from website
+////                                  startActivity(intent);
+//
+//
+//
+//                                    MongoCollection<Document> mongoCollection=mongoDatabase.getCollection("Faculity");
+//
+//                                    RealmResultTask<MongoCursor<Document>> field=mongoCollection.find().iterator();
+//                                    field.getAsync(result1 -> {
+//                                        Intent intent=new Intent(MainActivity.this,MainActivity2log.class);
+//                                        String s="";
+//                                        if(result.isSuccess())
+//                                        {
+//                                            Toast.makeText(MainActivity.this, "HELLO MONIKA", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        intent.putExtra("data",result.get().getId().toString());
+//                                        startActivity(intent);
+//                                        finish();
+//                                    });
 
 
 //                                    try {
@@ -172,22 +243,22 @@ public class MainActivity extends AppCompatActivity {
 //                                        }
 //                                    });
 
-
-                                }
-                                else{
-                                     Toast.makeText(MainActivity.this, e+" "+p+"CHECK INTERNET", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
-
-
-                    }
-                }
-
-
-
-        );
+//
+//                                }
+//                                else{
+//                                     Toast.makeText(MainActivity.this, e+" "+p+"CHECK INTERNET", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
+//
+//
+//
+//                    }
+//                }
+//
+//
+//
+//        );
 
 
 
