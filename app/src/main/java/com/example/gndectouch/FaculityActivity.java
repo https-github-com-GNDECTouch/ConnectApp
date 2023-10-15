@@ -25,13 +25,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FaculityActivity extends AppCompatActivity {
-
+    TextView mentorname;
     private ActivityResultLauncher<Intent> filePickerLauncher;
     private ActivityResultLauncher<Intent> filePickerLauncher1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculity);
+
+        mentorname=(TextView)findViewById(R.id.mentorname);
+        Intent intent = getIntent();
+        ArrayList<String> mentorlist = (ArrayList<String> )intent.getStringArrayListExtra("data");
+
+        // Now you can use the mentorlist in this activity
+        if (mentorlist != null) {
+            for (String name : mentorlist ) {
+                // Do something with each name
+                if(name!=null)
+                      Toast.makeText(this, "hello ji "+name, Toast.LENGTH_SHORT).show();
+            }
+        }
+        //Toast.makeText(this, mentorlist.size(), Toast.LENGTH_SHORT).show();
+       // mentorname.setText(builder.toString());
+
+
+        // Now you can use the mentorlist in this activity
+
+
         List<Student> books = readBooksFromCSV("books.txt");
 
         //take student csv

@@ -8,23 +8,32 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.bson.Document;
+
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
 import io.realm.mongodb.Credentials;
+import io.realm.mongodb.RealmResultTask;
 import io.realm.mongodb.User;
 import io.realm.mongodb.mongo.MongoClient;
+import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
+import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 
 public class MainActivity extends AppCompatActivity {
+
+
     MongoDatabase mongoDatabase;
     MongoClient mongoClient;
     //real mongodb
 
     String Appid="application-0-kdmkx";
 
-
+    ArrayList<String> mentorlist=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +66,90 @@ public class MainActivity extends AppCompatActivity {
                         //if condition to check email belong to admin
                         //check pass and call toast
                         //Intent for Faculity Activity pass userid
-                        Intent intent=new Intent(MainActivity.this,FaculityActivity.class);
-                        startActivity(intent);
+                        //put data of mentor
+
+                        User user= app.currentUser();
+                        mongoClient=user.getMongoClient("mongodb-atlas");
+                        mongoDatabase=mongoClient.getDatabase("GNDECdb");
+                        MongoCollection<Document> mongoCollection=mongoDatabase.getCollection("Mentor");
+                        MongoCollection<Document> mongoCollection2=mongoDatabase.getCollection("Mentee");
+
+                        Document queryFilter  = new Document("email", e);
+                        RealmResultTask<MongoCursor<Document>> queryfilter=mongoCollection.find(queryFilter).iterator();
+                        queryfilter.getAsync(task2->{
+                            if(task2.isSuccess())
+                            {
+                                Document q  = new Document("password", p);
+                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
+
+                                qu.getAsync(task->{
+                                    if(task.isSuccess())
+                                    {
+                                        Intent intent=new Intent(MainActivity.this, FaculityActivity.class);
+                                        //intent.putStringArrayListExtra("data",mentorlist);
+                                        startActivity(intent);
+                                    }
+                                });
+//                                MongoCursor<Document> resu=task.get();
+//
+//                                while (resu.hasNext())
+//                                {
+//
+//                                    Document curDoc=resu.next();
+//                                    if(curDoc.getString("name")!=null)
+//                                    {
+//                                        mentorlist.add(curDoc.getString("name"));
+//                                        //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
+//                                      //  TextView text=findViewById(R.id.mentorname);
+//                                       // text.setText(curDoc.getString("name"));
+//
+//                                    }
+//
+//                                }
+                            }
+
+                        });
+
+
+                        RealmResultTask<MongoCursor<Document>> qf=mongoCollection2.find(queryFilter).iterator();
+                        queryfilter.getAsync(task2->{
+                            if(task2.isSuccess())
+                            {
+                                Document q  = new Document("password", p);
+                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
+
+                                qu.getAsync(task->{
+                                    if(task.isSuccess())
+                                    {
+                                        Intent intent=new Intent(MainActivity.this, MenteeActivity.class);
+                                        //intent.putStringArrayListExtra("data",);
+                                        startActivity(intent);
+                                    }
+                                });
+//                                MongoCursor<Document> resu=task.get();
+//
+//                                while (resu.hasNext())
+//                                {
+//
+//                                    Document curDoc=resu.next();
+//                                    if(curDoc.getString("name")!=null)
+//                                    {
+//                                        mentorlist.add(curDoc.getString("name"));
+//                                        //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
+//                                      //  TextView text=findViewById(R.id.mentorname);
+//                                       // text.setText(curDoc.getString("name"));
+//
+//                                    }
+//
+//                                }
+                            }
+
+                        });
+
+//                        Intent intent=new Intent(MainActivity.this, FaculityActivity.class);
+//                        intent.putStringArrayListExtra("data",mentorlist);
+//                        startActivity(intent);
+
 
 
 
