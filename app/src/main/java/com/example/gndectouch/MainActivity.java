@@ -57,7 +57,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String e=email.getText().toString();
                 String p=password.getText().toString();
-                Credentials credentials=Credentials.emailPassword("monika8427084@gmail.com","Monika8427@#");
+                if(e.equals("monika8427084@gmail.com")&&p.equals("Monika8427@#"))
+                {
+                    Credentials credentials=Credentials.emailPassword("jagjit.2626@gmail.com","Monika8427@#");
+
+                    app.loginAsync(credentials,new App.Callback<User>() {
+                        @Override
+                        public void onResult(App.Result<User> result) {
+                            Intent intent=new Intent(MainActivity.this,alumniView.class);
+                            //intent.putStringArrayListExtra("data",mentorlist);
+                            startActivity(intent);
+                        }
+                    });
+
+                }
+                Credentials credentials=Credentials.emailPassword("jagjit.2626@gmail.com","Monika8427@#");
 
                 app.loginAsync(credentials,new App.Callback<User>(){
 
@@ -76,56 +90,81 @@ public class MainActivity extends AppCompatActivity {
 
                         Document queryFilter  = new Document("email", e);
                         RealmResultTask<MongoCursor<Document>> queryfilter=mongoCollection.find(queryFilter).iterator();
-                        queryfilter.getAsync(task2->{
-                            if(task2.isSuccess())
-                            {
-                                Document q  = new Document("password", p);
-                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
+                        RealmResultTask<MongoCursor<Document>> queryfilter2=mongoCollection2.find(queryFilter).iterator();
 
-                                qu.getAsync(task->{
-                                    if(task.isSuccess())
+                        queryfilter.getAsync(task->{
+                            if(task.isSuccess())
+                            {
+//                                Document q  = new Document("password", p);
+//                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
+//
+//                                qu.getAsync(task->{
+//                                    if(task.isSuccess())
+//                                    {
+                                MongoCursor<Document> resu=task.get();
+
+                                while (resu.hasNext())
+                                {
+
+                                    Document curDoc=resu.next();
+                                    if(curDoc.getString("email")!=null && curDoc.getString("email").equals(e))
                                     {
-                                        Intent intent=new Intent(MainActivity.this, FaculityActivity.class);
+                                      //  mentorlist.add(curDoc.getString("name"));
+
+                                        Intent intent=new Intent(MainActivity.this, MentorActivity.class);
                                         //intent.putStringArrayListExtra("data",mentorlist);
                                         startActivity(intent);
-                                    }
-                                });
-//                                MongoCursor<Document> resu=task.get();
-//
-//                                while (resu.hasNext())
-//                                {
-//
-//                                    Document curDoc=resu.next();
-//                                    if(curDoc.getString("name")!=null)
-//                                    {
-//                                        mentorlist.add(curDoc.getString("name"));
-//                                        //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
-//                                      //  TextView text=findViewById(R.id.mentorname);
-//                                       // text.setText(curDoc.getString("name"));
-//
+
+                                        //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
+                                      //  TextView text=findViewById(R.id.mentorname);
+                                       // text.setText(curDoc.getString("name"));
+
 //                                    }
 //
-//                                }
+                                }
+
+                                    }
+                                //});
+
                             }
 
                         });
 
 
                         RealmResultTask<MongoCursor<Document>> qf=mongoCollection2.find(queryFilter).iterator();
-                        queryfilter.getAsync(task2->{
-                            if(task2.isSuccess())
+                        queryfilter2.getAsync(task->{
+                            if(task.isSuccess())
                             {
-                                Document q  = new Document("password", p);
-                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
+//                                Document q  = new Document("password", p);
+//                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
+//
+//                                qu.getAsync(task->{
+//                                    if(task.isSuccess())
+                                 //   {
+                                        MongoCursor<Document> resu=task.get();
 
-                                qu.getAsync(task->{
-                                    if(task.isSuccess())
-                                    {
-                                        Intent intent=new Intent(MainActivity.this, MenteeActivity.class);
-                                        //intent.putStringArrayListExtra("data",);
-                                        startActivity(intent);
-                                    }
-                                });
+                                        while (resu.hasNext())
+                                        {
+
+                                            Document curDoc=resu.next();
+                                            if(curDoc.getString("email")!=null && curDoc.getString("email").equals(e) )
+                                            {
+                                                //  mentorlist.add(curDoc.getString("name"));
+
+                                                Intent intent=new Intent(MainActivity.this, MenteeActivity.class);
+                                                //intent.putStringArrayListExtra("data",);
+                                                startActivity(intent);
+
+                                                //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
+                                                //  TextView text=findViewById(R.id.mentorname);
+                                                // text.setText(curDoc.getString("name"));
+
+                                            }
+
+                                        }
+
+//                                    }
+//                                });
 //                                MongoCursor<Document> resu=task.get();
 //
 //                                while (resu.hasNext())
