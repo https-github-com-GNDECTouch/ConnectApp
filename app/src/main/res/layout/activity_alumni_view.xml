@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08"
+        app:layout_constraintVertical_bias="0.04"
         tools:ignore="MissingConstraints">
 
         <Button
@@ -50,20 +50,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:text="Submit"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805"
-        android:text="Submit"
-        />
+        app:layout_constraintVertical_bias="0.791" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="323dp"
+        android:layout_width="337dp"
 
-        android:layout_height="448dp"
+        android:layout_height="451dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,12 +70,14 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
         <LinearLayout
+            android:id="@+id/linearlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/mentor"
+
+                android:id="@+id/echrowr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -85,17 +85,21 @@
                 <TextView
                     android:id="@+id/mentorname"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+
+                    android:layout_height="wrap_content"
+                    android:text="Monika Verma" />
 
                 <TextView
                     android:id="@+id/mentoremail"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="monika@gmail.com" />
 
                 <TextView
                     android:id="@+id/mentorphone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="7899900776" />
 
             </LinearLayout>
         </LinearLayout>
@@ -111,7 +115,7 @@
         app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linear"
-        app:layout_constraintVertical_bias="0.817">
+        app:layout_constraintVertical_bias="0.787">
 
         <TextView
             android:id="@+id/csvdata"
