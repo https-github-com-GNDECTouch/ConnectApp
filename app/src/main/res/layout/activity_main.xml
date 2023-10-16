@@ -23,23 +23,19 @@
 
       <!-- Username input field -->
       <!-- Username input field -->
-      <TextView
-          android:id="@+id/loginText"
-          android:layout_width="187dp"
-          android:layout_height="wrap_content"
-          android:text="Login"
-          android:textAlignment="center"
-          android:textSize="36sp"
-          android:textStyle="bold"
-          android:gravity="center_horizontal" />
-
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp" />
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp" />
       <EditText
           android:id="@+id/emailinput"
           android:layout_width="317dp"
           android:layout_height="50dp"
           android:layout_marginTop="20dp"
           android:background="@drawable/custom_edittext_rounded"
-          android:backgroundTint="#FFFFFF"
+
           android:drawableLeft="@drawable/baseline_person_24"
           android:drawablePadding="8dp"
           android:hint="Username"
@@ -54,7 +50,7 @@
           android:layout_height="50dp"
           android:layout_marginTop="20dp"
           android:background="@drawable/custom_edittext_rounded"
-          android:backgroundTint="#FFFFFF"
+          
           android:drawableLeft="@drawable/baseline_lock_24"
           android:drawablePadding="8dp"
           android:hint="Password"
@@ -75,10 +71,10 @@
       <Button
           android:id="@+id/submitbtn"
           android:layout_width="210dp"
-          android:layout_height="60dp"
+          android:layout_height="52dp"
           android:layout_marginTop="20dp"
           android:text="Login"
-          android:backgroundTint="#FFFFFF"
+          android:backgroundTint="#529E8A"
           android:textColor="@color/black"
           android:textSize="18sp"
           app:cornerRadius="20dp" />
@@ -90,7 +86,7 @@
           android:id="@+id/forgotPassword"
           android:layout_width="210dp"
           android:layout_height="50dp"
-          android:backgroundTint="#FFFF"
+          android:backgroundTint="#529E8A"
           android:text="Forgot Password"
           android:textColor="@color/black"
           android:textSize="16sp" />
@@ -100,7 +96,7 @@
           android:id="@+id/guest"
           android:layout_width="210dp"
           android:layout_height="50dp"
-          android:backgroundTint="#FFFF"
+          android:backgroundTint="#529E8A"
           android:text="Guest"
           android:textColor="@color/black"
           android:textSize="16sp" />
