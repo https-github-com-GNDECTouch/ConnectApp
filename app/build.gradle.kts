@@ -5,7 +5,6 @@ plugins {
     //apply plugin of realm
     id("realm-android")
 }
-
 //for mongodb realmio
 //apply
 realm{
