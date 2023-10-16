@@ -75,33 +75,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
+<!--            <LinearLayout-->
 
-                android:id="@+id/echrowr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+<!--                android:id="@+id/echrow"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:id="@+id/mentorname"
-                    android:layout_width="match_parent"
+<!--                <TextView-->
+<!--                    android:id="@+id/mentorname"-->
+<!--                    android:layout_width="match_parent"-->
 
-                    android:layout_height="wrap_content"
-                    android:text="Monika Verma" />
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Monika Verma" />-->
 
-                <TextView
-                    android:id="@+id/mentoremail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="monika@gmail.com" />
+<!--                <TextView-->
+<!--                    android:id="@+id/mentoremail"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="monika@gmail.com" />-->
 
-                <TextView
-                    android:id="@+id/mentorphone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="7899900776" />
+<!--                <TextView-->
+<!--                    android:id="@+id/mentorphone"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="7899900776" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 
