@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,14 +48,14 @@ public class alumniView extends AppCompatActivity {
                     @Override
                     public void onResult(App.Result<User> resulting) {
 
-                        Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
                         Document document = new Document("occ", "mentor");
                         LinearLayout linear = findViewById(R.id.linearlay);
                         User user = app.currentUser();
                         mongoClient = user.getMongoClient("mongodb-atlas");
                         mongoDatabase = mongoClient.getDatabase("GNDECdb");
                         MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor");
-                        Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
                         RealmResultTask<MongoCursor<Document>> mentorlist = mongoCollection.find(document).iterator();
                         mentorlist.getAsync(task ->
                         {
@@ -70,7 +69,7 @@ public class alumniView extends AppCompatActivity {
                                             Document curDoc = resu.next();
                                             if (curDoc.getString("email") != null) {
                                                 LinearLayout itemLayout = new LinearLayout(alumniView.this);
-                                                
+
                                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                                         LinearLayout.LayoutParams.MATCH_PARENT,
                                                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -90,6 +89,8 @@ public class alumniView extends AppCompatActivity {
                                                         LinearLayout.LayoutParams.MATCH_PARENT,
                                                         LinearLayout.LayoutParams.WRAP_CONTENT
                                                 ));
+
+                                                nameTextView.setTextColor(getResources().getColor(android.R.color.white));
                                                 nameTextView.setText(curDoc.getString("name"));
 
                                                 TextView emailTextView = new TextView(alumniView.this);
@@ -97,6 +98,7 @@ public class alumniView extends AppCompatActivity {
                                                         LinearLayout.LayoutParams.MATCH_PARENT,
                                                         LinearLayout.LayoutParams.WRAP_CONTENT
                                                 ));
+                                                emailTextView.setTextColor(getResources().getColor(android.R.color.white));
                                                 emailTextView.setText(curDoc.getString("email"));
 
                                                 TextView phoneTextView = new TextView(alumniView.this);
@@ -104,14 +106,16 @@ public class alumniView extends AppCompatActivity {
                                                         LinearLayout.LayoutParams.MATCH_PARENT,
                                                         LinearLayout.LayoutParams.WRAP_CONTENT
                                                 ));
+                                                phoneTextView.setTextColor(getResources().getColor(android.R.color.white));
                                                 phoneTextView.setText(curDoc.getString("phone"));
 
                                                 // Add TextViews to the item's layout
                                                 itemLayout.addView(nameTextView);
                                                 itemLayout.addView(emailTextView);
+                                                itemLayout.addView(phoneTextView);
 
                                                 linearLayout.addView(itemLayout);
-                                                Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
+                                               // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
 
                                             }
 

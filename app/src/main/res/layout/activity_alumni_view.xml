@@ -11,10 +11,11 @@
         android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04"
+        app:layout_constraintVertical_bias="0.714"
         tools:ignore="MissingConstraints">
 
         <Button
@@ -55,18 +56,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.791" />
+        app:layout_constraintVertical_bias="0.945" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mentor List"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="337dp"
+        android:layout_width="316dp"
 
-        android:layout_height="451dp"
+        android:layout_height="389dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.893"
+        app:layout_constraintVertical_bias="0.195"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
         <LinearLayout
@@ -75,47 +88,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-<!--            <LinearLayout-->
-
-<!--                android:id="@+id/echrow"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/mentorname"-->
-<!--                    android:layout_width="match_parent"-->
-
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Monika Verma" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/mentoremail"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="monika@gmail.com" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/mentorphone"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="7899900776" />-->
-
-<!--            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
+        android:gravity="center_horizontal"
         android:id="@+id/linearLayout"
         android:layout_width="343dp"
         android:layout_height="37dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
+        app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linear"
-        app:layout_constraintVertical_bias="0.787">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.674">
 
         <TextView
             android:id="@+id/csvdata"
