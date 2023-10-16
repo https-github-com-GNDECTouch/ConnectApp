@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ public class FaculityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculity);
+
+        LinearLayout whole=(LinearLayout) findViewById(R.id.linearLayout);
 
         mentorname=(TextView)findViewById(R.id.mentorname);
         Intent intent = getIntent();

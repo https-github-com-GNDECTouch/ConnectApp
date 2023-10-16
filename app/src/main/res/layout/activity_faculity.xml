@@ -57,10 +57,12 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
             <LinearLayout
+
                 android:id="@+id/mentor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,14 +70,17 @@
 
                 <TextView
                     android:id="@+id/mentorname"
+                    android:text="Monika Verma"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/mentoremail"
                     android:layout_width="match_parent"
+                    android:text="monika@gmail.com"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/mentorphone"
+                    android:text="7899900776"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

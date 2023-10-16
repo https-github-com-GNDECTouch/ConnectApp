@@ -113,7 +113,28 @@ public class MainActivity extends AppCompatActivity {
 
                                         Intent intent=new Intent(MainActivity.this, MentorActivity.class);
                                         //intent.putStringArrayListExtra("data",mentorlist);
-                                        startActivity(intent);
+                                        if (user != null) {
+                                            user.logOutAsync(resul -> {
+                                                if (resul.isSuccess()) {
+                                                    // Logout was successful
+                                                    // You can perform any additional actions after logout here
+                                                    startActivity(intent);
+                                                } else {
+                                                    // Logout failed
+                                                    // Handle the error, if necessary
+                                                }
+                                            });
+                                        }
+                                       // This code will log out the user asynchronously after the Intent and related activity have been started. You should include this code after starting each new activity. This will ensure that the user is logged out before navigating to the next screen.
+
+                                     //   Make sure you have the app instance available to access the current user. You can adapt this code to your specific use case to ensure that users are logged out when needed.
+
+
+
+
+
+
+
 
                                         //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
                                       //  TextView text=findViewById(R.id.mentorname);
