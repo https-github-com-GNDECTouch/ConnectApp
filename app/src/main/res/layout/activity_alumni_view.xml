@@ -1,85 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FaculityActivity">
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
 
-    <LinearLayout
-        android:id="@+id/linear"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.714"
-        tools:ignore="MissingConstraints">
+        android:layout_height="50dp">
 
-        <Button
-            android:id="@+id/selectFileButton"
-            android:layout_width="101dp"
-            android:layout_height="38dp"
-            android:text="Select File"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.166"
-            tools:ignore="TouchTargetSizeCheck" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/design_default_color_primary">
+            <!--      <LinearLayout-->
+            <!--          android:layout_width="match_parent"-->
+            <!--          android:layout_height="wrap_content"-->
+            <!--          ></LinearLayout>-->
 
-        <Button
-            android:id="@+id/selectFileButton1"
-            android:layout_width="101dp"
-            android:layout_height="38dp"
-            android:text="Select File"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.166"
-            tools:ignore="TouchTargetSizeCheck" />
+        </androidx.appcompat.widget.Toolbar>
 
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/alotmentor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    </com.google.android.material.appbar.AppBarLayout>
 
-        android:text="Submit"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.945" />
 
     <TextView
+        android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mentor List"
+        android:padding="15dp"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
+
 
     <ScrollView
+        android:layout_gravity="center_horizontal"
         android:id="@+id/scrollView2"
         android:layout_width="316dp"
-
+        android:padding="20dp"
         android:layout_height="389dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195"
+
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
         <LinearLayout
@@ -90,44 +55,71 @@
 
         </LinearLayout>
     </ScrollView>
-
     <LinearLayout
+        android:id="@+id/linear"
+        android:layout_margin="14dp"
+        android:padding="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/selectFileButton"
+            android:layout_width="101dp"
+            android:layout_height="38dp"
+            android:text="Select File"
+
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/selectFileButton1"
+            android:layout_width="101dp"
+            android:layout_height="38dp"
+            android:text="Select File"
+
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </LinearLayout>
+    <Button
+
+        android:id="@+id/alotmentor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Submit"
+         />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+    <LinearLayout
+
+        android:padding="13dp"
         android:gravity="center_horizontal"
         android:id="@+id/linearLayout"
-        android:layout_width="343dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.382"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.674">
+        >
 
         <TextView
             android:id="@+id/csvdata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.076"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.24" />
+             />
 
         <TextView
             android:id="@+id/csvdata1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.356"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.24" />
+           />
     </LinearLayout>
+    </ScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

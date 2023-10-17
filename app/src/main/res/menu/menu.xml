@@ -7,15 +7,17 @@
         android:title=""
         app:showAsAction="always">
 
+
         <menu >
+
             <item
                android:id="@+id/chat"
                 app:showAsAction="collapseActionView"
                 android:title="Chat" />
             <item
-                android:id="@+id/Mentor"
+                android:id="@+id/Home"
                 app:showAsAction="collapseActionView"
-                android:title="Mentor" />
+                android:title="Home" />
             <item
                 android:id="@+id/events"
                 app:showAsAction="collapseActionView"
