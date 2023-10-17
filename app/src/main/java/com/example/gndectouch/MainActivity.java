@@ -59,109 +59,115 @@ public class MainActivity extends AppCompatActivity {
                 String p=password.getText().toString();
                 if(e.equals("monika8427084@gmail.com")&&p.equals("Monika8427@#"))
                 {
-                    Credentials credentials=Credentials.emailPassword("jagjit.2626@gmail.com","Monika8427@#");
 
-                    app.loginAsync(credentials,new App.Callback<User>() {
-                        @Override
-                        public void onResult(App.Result<User> result) {
-                            Intent intent=new Intent(MainActivity.this,alumniView.class);
-                            //intent.putStringArrayListExtra("data",mentorlist);
-                            startActivity(intent);
-                        }
-                    });
+
+                    Intent intent=new Intent(MainActivity.this,alumniView.class);
+                    //intent.putStringArrayListExtra("data",mentorlist);
+                    startActivity(intent);
+
 
                 }
-                Credentials credentials=Credentials.emailPassword("jagjit.2626@gmail.com","Monika8427@#");
+                else {
+                    Credentials credentials = Credentials.emailPassword("jagjit.2626@gmail.com", "Monika8427@#");
 
-                app.loginAsync(credentials,new App.Callback<User>(){
+                    app.loginAsync(credentials, new App.Callback<User>() {
 
-                    @Override
-                    public void onResult(App.Result<User> result) {
-                        //if condition to check email belong to admin
-                        //check pass and call toast
-                        //Intent for Faculity Activity pass userid
-                        //put data of mentor
+                        @Override
+                        public void onResult(App.Result<User> result) {
+                            //if condition to check email belong to admin
+                            //check pass and call toast
+                            //Intent for Faculity Activity pass userid
+                            //put data of mentor
 
-                        User user= app.currentUser();
-                        mongoClient=user.getMongoClient("mongodb-atlas");
-                        mongoDatabase=mongoClient.getDatabase("GNDECdb");
-                        MongoCollection<Document> mongoCollection=mongoDatabase.getCollection("Mentor");
-                        MongoCollection<Document> mongoCollection2=mongoDatabase.getCollection("Mentee");
+                            User user = app.currentUser();
+                            mongoClient = user.getMongoClient("mongodb-atlas");
+                            mongoDatabase = mongoClient.getDatabase("GNDECdb");
+                            MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor");
+                            MongoCollection<Document> mongoCollection2 = mongoDatabase.getCollection("Mentee");
 
-                        Document queryFilter  = new Document("email", e);
-                        RealmResultTask<MongoCursor<Document>> queryfilter=mongoCollection.find(queryFilter).iterator();
-                        RealmResultTask<MongoCursor<Document>> queryfilter2=mongoCollection2.find(queryFilter).iterator();
+                            Document queryFilter = new Document("email", e);
+                            RealmResultTask<MongoCursor<Document>> queryfilter = mongoCollection.find(queryFilter).iterator();
+                            RealmResultTask<MongoCursor<Document>> queryfilter2 = mongoCollection2.find(queryFilter).iterator();
 
-                        queryfilter.getAsync(task->{
-                            if(task.isSuccess())
-                            {
+                            queryfilter.getAsync(task -> {
+                                if (task.isSuccess()) {
 //                                Document q  = new Document("password", p);
 //                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
 //
 //                                qu.getAsync(task->{
 //                                    if(task.isSuccess())
 //                                    {
-                                MongoCursor<Document> resu=task.get();
+                                    MongoCursor<Document> resu = task.get();
 
-                                while (resu.hasNext())
-                                {
+                                    while (resu.hasNext()) {
 
-                                    Document curDoc=resu.next();
-                                    if(curDoc.getString("email")!=null && curDoc.getString("email").equals(e))
-                                    {
-                                      //  mentorlist.add(curDoc.getString("name"));
+                                        Document curDoc = resu.next();
+                                        if (curDoc.getString("email") != null && curDoc.getString("email").equals(e)) {
+                                            //  mentorlist.add(curDoc.getString("name"));
 
-                                        Intent intent=new Intent(MainActivity.this, MentorActivity.class);
-                                        //intent.putStringArrayListExtra("data",mentorlist);
-                                        startActivity(intent);
+                                            Intent intent = new Intent(MainActivity.this, MentorActivity.class);
+                                            //intent.putStringArrayListExtra("data",mentorlist);
+                                            if (user != null) {
+                                                user.logOutAsync(resul -> {
+                                                    if (resul.isSuccess()) {
+                                                        // Logout was successful
+                                                        // You can perform any additional actions after logout here
+                                                        startActivity(intent);
+                                                    } else {
+                                                        // Logout failed
+                                                        // Handle the error, if necessary
+                                                    }
+                                                });
+                                            }
+                                            // This code will log out the user asynchronously after the Intent and related activity have been started. You should include this code after starting each new activity. This will ensure that the user is logged out before navigating to the next screen.
 
-                                        //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
-                                      //  TextView text=findViewById(R.id.mentorname);
-                                       // text.setText(curDoc.getString("name"));
+                                            //   Make sure you have the app instance available to access the current user. You can adapt this code to your specific use case to ensure that users are logged out when needed.
+
+
+                                            //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
+                                            //  TextView text=findViewById(R.id.mentorname);
+                                            // text.setText(curDoc.getString("name"));
 
 //                                    }
 //
-                                }
+                                        }
 
                                     }
-                                //});
+                                    //});
 
-                            }
+                                }
 
-                        });
+                            });
 
 
-                        RealmResultTask<MongoCursor<Document>> qf=mongoCollection2.find(queryFilter).iterator();
-                        queryfilter2.getAsync(task->{
-                            if(task.isSuccess())
-                            {
+                            RealmResultTask<MongoCursor<Document>> qf = mongoCollection2.find(queryFilter).iterator();
+                            queryfilter2.getAsync(task -> {
+                                if (task.isSuccess()) {
 //                                Document q  = new Document("password", p);
 //                                RealmResultTask<MongoCursor<Document>> qu=mongoCollection.find(q).iterator();
 //
 //                                qu.getAsync(task->{
 //                                    if(task.isSuccess())
-                                 //   {
-                                        MongoCursor<Document> resu=task.get();
+                                    //   {
+                                    MongoCursor<Document> resu = task.get();
 
-                                        while (resu.hasNext())
-                                        {
+                                    while (resu.hasNext()) {
 
-                                            Document curDoc=resu.next();
-                                            if(curDoc.getString("email")!=null && curDoc.getString("email").equals(e) )
-                                            {
-                                                //  mentorlist.add(curDoc.getString("name"));
+                                        Document curDoc = resu.next();
+                                        if (curDoc.getString("email") != null && curDoc.getString("email").equals(e)) {
+                                            //  mentorlist.add(curDoc.getString("name"));
 
-                                                Intent intent=new Intent(MainActivity.this, MenteeActivity.class);
-                                                //intent.putStringArrayListExtra("data",);
-                                                startActivity(intent);
+                                            Intent intent = new Intent(MainActivity.this, MenteeActivity.class);
+                                            //intent.putStringArrayListExtra("data",);
+                                            startActivity(intent);
 
-                                                //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
-                                                //  TextView text=findViewById(R.id.mentorname);
-                                                // text.setText(curDoc.getString("name"));
-
-                                            }
+                                            //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
+                                            //  TextView text=findViewById(R.id.mentorname);
+                                            // text.setText(curDoc.getString("name"));
 
                                         }
+
+                                    }
 
 //                                    }
 //                                });
@@ -181,39 +187,34 @@ public class MainActivity extends AppCompatActivity {
 //                                    }
 //
 //                                }
-                            }
+                                }
 
-                        });
+                            });
+
 
 //                        Intent intent=new Intent(MainActivity.this, FaculityActivity.class);
 //                        intent.putStringArrayListExtra("data",mentorlist);
 //                        startActivity(intent);
 
 
+                            //else if condition belong to mentor
+                            //check pass and call toast
+                            //Intent mentor activity pass userid
 
 
+                            //else check mentee
+                            //check pass and call toast
+                            //Intent mentee Activity pass userId
 
 
-                        //else if condition belong to mentor
-                        //check pass and call toast
-                        //Intent mentor activity pass userid
+                            //elsse break out of it logout with credential
 
 
+                            //
+                        }
 
-                        //else check mentee
-                        //check pass and call toast
-                        //Intent mentee Activity pass userId
-
-
-
-
-                        //elsse break out of it logout with credential
-
-
-                        //
-                    }
-                });
-
+                    });
+                }
             }
         });
 
