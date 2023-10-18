@@ -54,7 +54,9 @@ public class alumniView extends AppCompatActivity {
         LinearLayout whole = (LinearLayout) findViewById(R.id.linearlay);
 
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-
+        setSupportActionBar(tb);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        tb.setTitle("Home");
 
 
         Button btn=findViewById(R.id.selectFileButton);
@@ -183,15 +185,15 @@ public class alumniView extends AppCompatActivity {
                                                 phoneTextView.setTextColor(getResources().getColor(android.R.color.black));
                                                 phoneTextView.setText(curDoc.getString("phone"));
 
+
                                                 // Add TextViews to the item's layout
                                                 itemLayout.addView(nameTextView);
                                                 itemLayout.addView(emailTextView);
                                                 itemLayout.addView(phoneTextView);
 
+
                                                 linearLayout.addView(itemLayout);
-                                                setSupportActionBar(tb);
-                                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                                                tb.setTitle("Home");
+
                                                // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
 
                                             }
@@ -252,13 +254,12 @@ public class alumniView extends AppCompatActivity {
         RealmResultTask<MongoCursor<Document>> eventList = mongoCollection.find(document).iterator();
 
         eventList.getAsync(task -> {
-            Toast.makeText(this, "yeah lo 1", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "yeah lo 1", Toast.LENGTH_SHORT).show();
 
             if (task.isSuccess()) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(alumniView.this, "chk v 1", Toast.LENGTH_SHORT).show();
+TextView cur=findViewById(R.id.cur);
+cur.setText("Event List");
+                     //   Toast.makeText(alumniView.this, "chk v 1", Toast.LENGTH_SHORT).show();
                         LinearLayout linearLayout = findViewById(R.id.linearlay);
                         linearLayout.removeAllViews();
                         MongoCursor<Document> resu = task.get();
@@ -266,8 +267,9 @@ public class alumniView extends AppCompatActivity {
                             // Toast.makeText(alumniView.this, "chk v 2", Toast.LENGTH_SHORT).show();
                             Document curDoc = resu.next();
                             if (curDoc.getString("name") != null) {
-                                Toast.makeText(alumniView.this, "chk v end", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(alumniView.this, "chk v end", Toast.LENGTH_SHORT).show();
                                 LinearLayout itemLayout = new LinearLayout(alumniView.this);
+                                LinearLayout itemLayout2 = new LinearLayout(alumniView.this);
 
                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -277,8 +279,17 @@ public class alumniView extends AppCompatActivity {
                                     layoutParams.setMargins(margin, margin, margin, margin); // left, top, right, bottom
                                     itemLayout.setLayoutParams(layoutParams);
 
+                                LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                );
+                                // Define your margin value here
+                                layoutParams2.setMargins(2,2,2,2); // left, top, right, bottom
+                                itemLayout2.setLayoutParams(layoutParams2);
+
 
                                     itemLayout.setOrientation(LinearLayout.VERTICAL);
+                                itemLayout2.setOrientation(LinearLayout.HORIZONTAL);
                                     itemLayout.setBackgroundColor(getResources().getColor(android.R.color.background_light)); // Change the color as needed
 
 
@@ -308,17 +319,43 @@ public class alumniView extends AppCompatActivity {
                                     phoneTextView.setText(curDoc.getString("name"));
 
                                     // Add TextViews to the item's layout
-                                    itemLayout.addView(nameTextView);
+
+                                Button addEvent=new Button(alumniView.this);
+                                addEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+                                addEvent.setText("Add Event");
+                                addEvent.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toast.makeText(alumniView.this, "I will add ur event id"+curDoc.getObjectId("_id").toHexString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                                Button DeleteEvent=new Button(alumniView.this);
+                                DeleteEvent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT));
+                                DeleteEvent.setText("Delete Event");
+                                DeleteEvent.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Toast.makeText(alumniView.this, "I will delete ur event"+curDoc.getObjectId("_id").toHexString(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                itemLayout2.setGravity(1);
+                                itemLayout.setGravity(1);
+
+                                itemLayout.addView(nameTextView);
                                     itemLayout.addView(emailTextView);
                                     itemLayout.addView(phoneTextView);
+                                    itemLayout2.addView(addEvent);
+                                    itemLayout2.addView(DeleteEvent);
 
                             linearLayout.addView(itemLayout);
+                            linearLayout.addView(itemLayout2);
+
                             }
 
                         }
-                    }
 
-                });
             }
         });
 
