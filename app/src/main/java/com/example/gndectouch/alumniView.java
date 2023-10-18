@@ -46,6 +46,7 @@ public class alumniView extends AppCompatActivity {
     private ActivityResultLauncher<Intent> filePickerLauncher;
     private ActivityResultLauncher<Intent> filePickerLauncher1;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +54,7 @@ public class alumniView extends AppCompatActivity {
         LinearLayout whole = (LinearLayout) findViewById(R.id.linearlay);
 
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tb);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        tb.setTitle("Home");
+
 
 
         Button btn=findViewById(R.id.selectFileButton);
@@ -118,6 +117,7 @@ public class alumniView extends AppCompatActivity {
                     @Override
                     public void onResult(App.Result<User> resulting) {
 
+
                        // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
                         Document document = new Document("occ", "mentor");
                         LinearLayout linear = findViewById(R.id.linearlay);
@@ -134,6 +134,10 @@ public class alumniView extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         LinearLayout linearLayout = findViewById(R.id.linearlay);
+                                        for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                                            View child = linearLayout.getChildAt(i);
+                                            linearLayout.removeView(child);
+                                        }
                                         MongoCursor<Document> resu = task.get();
                                         while (resu.hasNext()) {
                                             Document curDoc = resu.next();
@@ -185,6 +189,9 @@ public class alumniView extends AppCompatActivity {
                                                 itemLayout.addView(phoneTextView);
 
                                                 linearLayout.addView(itemLayout);
+                                                setSupportActionBar(tb);
+                                                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                                                tb.setTitle("Home");
                                                // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
 
                                             }
@@ -210,8 +217,8 @@ public class alumniView extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.events) {
-            // Handle item 1 click
-            showPopupWindow(item.getActionView());
+            loadEventsFromDatabase();
+
             Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.logout) {
@@ -227,42 +234,94 @@ public class alumniView extends AppCompatActivity {
         else if (id == R.id.Home) {
             Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
             // Handle item 2 click
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-    private void showPopupWindow(View anchorView) {
-        
-          //LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-//        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//        if (inflater != null) {
-//             View popupView = inflater.inflate(R.layout.popup_layout, null);
-//
-//            popupWindow = new PopupWindow(popupView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, true);
-//
-//            if (popupWindow != null) {
-//                popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
-//
-//                Button closeButton = popupView.findViewById(R.id.closebutton);
-//
-//                if (closeButton != null) {
-//                    closeButton.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            popupWindow.dismiss();
-//                        }
-//                    });
-//                } else {
-//                    // Handle the case where the closeButton view is not found.
-//                }
-//            } else {
-//                // Handle the case where the popupWindow is not created.
-//            }
-//        } else {
-//            // Handle the case where the inflater is null.
-//        }
+
+    private void loadEventsFromDatabase() {
+        App app = new App(new AppConfiguration.Builder(Appid).build());
+        Document document = new Document("event", "event");
+        User user = app.currentUser();
+        MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase("GNDECdb");
+        MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Events");
+
+        RealmResultTask<MongoCursor<Document>> eventList = mongoCollection.find(document).iterator();
+
+        eventList.getAsync(task -> {
+            Toast.makeText(this, "yeah lo 1", Toast.LENGTH_SHORT).show();
+
+            if (task.isSuccess()) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(alumniView.this, "chk v 1", Toast.LENGTH_SHORT).show();
+                        LinearLayout linearLayout = findViewById(R.id.linearlay);
+                        linearLayout.removeAllViews();
+                        MongoCursor<Document> resu = task.get();
+                        while (resu.hasNext()) {
+                            // Toast.makeText(alumniView.this, "chk v 2", Toast.LENGTH_SHORT).show();
+                            Document curDoc = resu.next();
+                            if (curDoc.getString("name") != null) {
+                                Toast.makeText(alumniView.this, "chk v end", Toast.LENGTH_SHORT).show();
+                                LinearLayout itemLayout = new LinearLayout(alumniView.this);
+
+                                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                );
+                                    int margin = 16; // Define your margin value here
+                                    layoutParams.setMargins(margin, margin, margin, margin); // left, top, right, bottom
+                                    itemLayout.setLayoutParams(layoutParams);
+
+
+                                    itemLayout.setOrientation(LinearLayout.VERTICAL);
+                                    itemLayout.setBackgroundColor(getResources().getColor(android.R.color.background_light)); // Change the color as needed
+
+
+                                    TextView nameTextView = new TextView(alumniView.this);
+                                    nameTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
+                                    ));
+
+                                    nameTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                    nameTextView.setText(curDoc.getString("name"));
+
+                                    TextView emailTextView = new TextView(alumniView.this);
+                                    emailTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
+                                    ));
+                                    emailTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                    emailTextView.setText(curDoc.getString("descroption"));
+
+                                    TextView phoneTextView = new TextView(alumniView.this);
+                                    phoneTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                            LinearLayout.LayoutParams.MATCH_PARENT,
+                                            LinearLayout.LayoutParams.WRAP_CONTENT
+                                    ));
+                                    phoneTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                    phoneTextView.setText(curDoc.getString("name"));
+
+                                    // Add TextViews to the item's layout
+                                    itemLayout.addView(nameTextView);
+                                    itemLayout.addView(emailTextView);
+                                    itemLayout.addView(phoneTextView);
+
+                            linearLayout.addView(itemLayout);
+                            }
+
+                        }
+                    }
+
+                });
+            }
+        });
+
     }
 
     private void displayFileContent(Uri fileUri) {
@@ -330,50 +389,3 @@ public class alumniView extends AppCompatActivity {
         }
     }
 }
-
-//                mentorlist.getAsync(task -> {
-//                    if (task.isSuccess()) {
-//                        Toast.makeText(alumniView.this, "stap2", Toast.LENGTH_SHORT).show();
-//                        MongoCursor<Document> resu = task.get();
-//
-//                        while (resu.hasNext()) {
-//                            LinearLayout echrow = (LinearLayout) findViewById(R.id.linearLayout);
-//                            Document curDoc = resu.next();
-//                            if (curDoc.getString("email") != null) {
-//                                Toast.makeText(alumniView.this, "stap3", Toast.LENGTH_SHORT).show();
-//                                //  mentorlist.add(curDoc.getString("name"));
-//                                TextView mentoremail = findViewById(R.id.emailinput);
-//                                mentoremail.setText(curDoc.getString("email"));
-//                                TextView mentorname = findViewById(R.id.mentorname);
-//                                mentorname.setText(curDoc.getString("name"));
-//                                TextView phone = findViewById(R.id.mentorphone);
-//                                phone.setText(curDoc.getString("phone"));
-//
-//                                // 'this' is the context
-//
-//
-//                                // You can customize the TextView here, e.g., set text size, text color, etc.
-//                                Toast.makeText(alumniView.this, "stap4", Toast.LENGTH_SHORT).show();
-//                                // Add the TextView to the LinearLayout
-//                                echrow.addView(mentoremail);
-//                                echrow.addView(mentorname);
-//                                echrow.addView(phone);
-//
-//                            }
-//                            Toast.makeText(alumniView.this, "stap5", Toast.LENGTH_SHORT).show();
-//                            linear.addView(echrow);
-//
-//                        }
-//                        Toast.makeText(alumniView.this, "stap6", Toast.LENGTH_SHORT).show();
-//                        ScrollView scroller = findViewById(R.id.scrollView2);
-//                        scroller.addView(linear);
-//                    }
-//                });
-//            }
-//        });
-//    }
-//}
-//
-
-
-//}
