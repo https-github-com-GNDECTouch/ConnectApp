@@ -7,14 +7,97 @@
     android:background="@drawable/backimg1"
     tools:context=".MenteeActivity">
 
+    <!-- Student Details -->
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mentee welcome"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="68dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        android:text="John"
+        android:textAlignment="viewStart"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCRN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="CRN: 123456"
+        app:layout_constraintTop_toBottomOf="@id/textViewName"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewURN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="URN: 789012"
+        app:layout_constraintTop_toBottomOf="@id/textViewCRN"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewCollegeMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="college.johndoe@example.com"
+        app:layout_constraintTop_toBottomOf="@id/textViewURN"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewPersonalMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="john.doe@example.com"
+        app:layout_constraintTop_toBottomOf="@id/textViewCollegeMail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        />
+
+    <TextView
+        android:id="@+id/textViewCurrentSem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Current Semester: 5"
+        app:layout_constraintTop_toBottomOf="@id/textViewPersonalMail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        />
+
+
+    <!-- Chat Button -->
+    <ImageView
+        android:id="@+id/chatButton"
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:padding="16dp"
+        android:src="@drawable/ic_chat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

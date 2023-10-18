@@ -26,6 +26,10 @@
                 android:id="@+id/logout"
                 app:showAsAction="collapseActionView"
                 android:title="Logout" />
+            <item
+                android:id="@+id/upload"
+                app:showAsAction="collapseActionView"
+                android:title="Upload Data" />
         </menu>
 
         /</item>
