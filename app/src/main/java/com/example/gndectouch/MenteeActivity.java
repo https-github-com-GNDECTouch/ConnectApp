@@ -51,7 +51,7 @@ public class MenteeActivity extends AppCompatActivity {
     // Function to show the chat popup
     private void showChatPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Chat with Student");
+        builder.setTitle("Chat with Mentor");
 
         // Create a layout for the chat content
         View chatLayout = getLayoutInflater().inflate(R.layout.chat_popup, null);
