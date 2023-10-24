@@ -146,7 +146,7 @@ public class alumniView extends AppCompatActivity {
                                         itemLayout.addView(phoneTextView);
 
                                         linearLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
-                                        itemLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
+
                                         linearLayout.addView(itemLayout);
 
                                         // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
