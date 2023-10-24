@@ -1,5 +1,6 @@
 package com.example.gndectouch;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -86,6 +87,7 @@ public class alumniView extends AppCompatActivity {
                 {
                     if (task.isSuccess()) {
                         runOnUiThread(new Runnable() {
+                            @SuppressLint("NewApi")
                             @Override
                             public void run() {
                                 LinearLayout linearLayout = findViewById(R.id.linearlay);
@@ -107,8 +109,7 @@ public class alumniView extends AppCompatActivity {
                                         layoutParams.setMargins(margin, margin, margin, margin); // left, top, right, bottom
                                         itemLayout.setLayoutParams(layoutParams);
 
-
-
+                                       itemLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
                                         itemLayout.setOrientation(LinearLayout.VERTICAL);
                                         itemLayout.setBackgroundColor(getResources().getColor(android.R.color.background_light)); // Change the color as needed
 
@@ -144,7 +145,8 @@ public class alumniView extends AppCompatActivity {
                                         itemLayout.addView(emailTextView);
                                         itemLayout.addView(phoneTextView);
 
-
+                                        linearLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
+                                        itemLayout.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
                                         linearLayout.addView(itemLayout);
 
                                         // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
