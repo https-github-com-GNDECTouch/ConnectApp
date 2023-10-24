@@ -28,7 +28,12 @@
 
 
     </com.google.android.material.appbar.AppBarLayout>
-
+    
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/myhome"
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -65,6 +70,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Add Event"/>
+    <FrameLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frag"
+
+        ></FrameLayout>
 
 
     <ScrollView
@@ -160,6 +172,6 @@
                 android:text="TextView" />
         </LinearLayout>
     </ScrollView>
-
+</LinearLayout>
 
 </LinearLayout>

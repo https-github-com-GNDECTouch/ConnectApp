@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
 import org.bson.Document;
 
@@ -78,7 +79,7 @@ public class alumniView extends AppCompatActivity {
                 User user = app.currentUser();
                 mongoClient = user.getMongoClient("mongodb-atlas");
                 mongoDatabase = mongoClient.getDatabase("GNDECdb");
-                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor1");
+                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor");
                 // Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
                 RealmResultTask<MongoCursor<Document>> mentorlist = mongoCollection.find(document).iterator();
                 mentorlist.getAsync(task ->
@@ -316,17 +317,120 @@ public class alumniView extends AppCompatActivity {
         }
         else if (id == R.id.chat) {
             Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
+
+            MessegeFragment fragment = new MessegeFragment();
+            FragmentTransaction transaction =
+                    getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frag, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
             // Handle item 2 click
             return true;
         }
         else if (id == R.id.Home) {
-            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+            App app = new App(new AppConfiguration.Builder(Appid).build());
+
+            app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
+                @Override
+                public void onResult(App.Result<User> resulting) {
+
+
+                    // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
+                    //showing mentor data
+                    Document document = new Document("occ", "mentor");
+                    LinearLayout linear = findViewById(R.id.linearlay);
+                    linear.removeAllViews();
+                    User user = app.currentUser();
+                    mongoClient = user.getMongoClient("mongodb-atlas");
+                    mongoDatabase = mongoClient.getDatabase("GNDECdb");
+                    MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor");
+                    // Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
+                    RealmResultTask<MongoCursor<Document>> mentorlist = mongoCollection.find(document).iterator();
+                    mentorlist.getAsync(task ->
+                    {
+                        if (task.isSuccess()) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    LinearLayout linearLayout = findViewById(R.id.linearlay);
+                                    for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                                        View child = linearLayout.getChildAt(i);
+                                        linearLayout.removeView(child);
+                                    }
+                                    MongoCursor<Document> resu = task.get();
+                                    while (resu.hasNext()) {
+                                        Document curDoc = resu.next();
+                                        if (curDoc.getString("email") != null) {
+                                            LinearLayout itemLayout = new LinearLayout(alumniView.this);
+
+                                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                            );
+                                            int margin = 16; // Define your margin value here
+                                            layoutParams.setMargins(margin, margin, margin, margin); // left, top, right, bottom
+                                            itemLayout.setLayoutParams(layoutParams);
+
+
+
+                                            itemLayout.setOrientation(LinearLayout.VERTICAL);
+                                            itemLayout.setBackgroundColor(getResources().getColor(android.R.color.background_light)); // Change the color as needed
+
+
+                                            TextView nameTextView = new TextView(alumniView.this);
+                                            nameTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                            ));
+
+                                            nameTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                            nameTextView.setText(curDoc.getString("name"));
+
+                                            TextView emailTextView = new TextView(alumniView.this);
+                                            emailTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                            ));
+                                            emailTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                            emailTextView.setText(curDoc.getString("email"));
+
+                                            TextView phoneTextView = new TextView(alumniView.this);
+                                            phoneTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                    LinearLayout.LayoutParams.MATCH_PARENT,
+                                                    LinearLayout.LayoutParams.WRAP_CONTENT
+                                            ));
+                                            phoneTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                            phoneTextView.setText(curDoc.getString("phone"));
+
+
+                                            // Add TextViews to the item's layout
+                                            itemLayout.addView(nameTextView);
+                                            itemLayout.addView(emailTextView);
+                                            itemLayout.addView(phoneTextView);
+
+
+                                            linearLayout.addView(itemLayout);
+
+                                            // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
+
+                                        }
+
+                                    }
+                                }
+
+                            });
+                        }
+                    });
+
+                }
+            });
             // Handle item 2 click
 
             return true;
         }
         else if (id == R.id.upload) {
-            Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Upload", Toast.LENGTH_SHORT).show();
             // Handle item 2 click
 
 
@@ -541,7 +645,7 @@ public class alumniView extends AppCompatActivity {
                 csvTextView.setText(currentText + "\n" + csvData);
 
                 // Write the data to the CSV file
-                writeDataToCSVFile(csvData);
+
                 // You can use the selected file URI to access the chosen file.
                 // For example, you can open and read the file's contents.
             }
