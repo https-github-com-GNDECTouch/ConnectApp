@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,9 +24,15 @@ import androidx.appcompat.widget.Toolbar;
 import org.bson.Document;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.List;
 
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -37,8 +44,13 @@ import io.realm.mongodb.mongo.MongoCollection;
 import io.realm.mongodb.mongo.MongoDatabase;
 import io.realm.mongodb.mongo.iterable.MongoCursor;
 
-public class alumniView extends AppCompatActivity {
 
+
+
+public class alumniView extends AppCompatActivity {
+    List<String[]> mentorlist;
+    List<String[]> menteelist;
+    File myFile;
     private PopupWindow popupWindow;
     TextView mentorname;
     MongoDatabase mongoDatabase;
@@ -60,12 +72,13 @@ public class alumniView extends AppCompatActivity {
 
 
                 // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
+                //showing mentor data
                 Document document = new Document("occ", "mentor");
                 LinearLayout linear = findViewById(R.id.linearlay);
                 User user = app.currentUser();
                 mongoClient = user.getMongoClient("mongodb-atlas");
                 mongoDatabase = mongoClient.getDatabase("GNDECdb");
-                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor");
+                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor1");
                 // Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
                 RealmResultTask<MongoCursor<Document>> mentorlist = mongoCollection.find(document).iterator();
                 mentorlist.getAsync(task ->
@@ -192,26 +205,47 @@ public class alumniView extends AppCompatActivity {
 
             }
         });
+
+        //toolbar options and thier working
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         tb.setTitle("Home");
 
+
+
+
+
+
+
+
+
         Button alotmentor=findViewById(R.id.alotmentor);
         alotmentor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(filePickerLauncher!=null && filePickerLauncher1!=null)
+                {
 
-
-
+                }
             }
         });
+
+
+
+
+
+
+
+
+
         Button btn=findViewById(R.id.selectFileButton);
         Button btn1=findViewById(R.id.selectFileButton1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFilePicker1();
+              //  openFilePicker1();
+
             }
 
 
@@ -499,8 +533,15 @@ public class alumniView extends AppCompatActivity {
             if (data != null) {
                 Toast.makeText(alumniView.this, "HELLO MONIKA 1", Toast.LENGTH_SHORT).show();
                 Uri selectedFileUri = data.getData();
-                TextView csv=findViewById(R.id.csvdata);
-                csv.setText(selectedFileUri.toString());
+                String csvData = readCSVFile(selectedFileUri);
+
+                // Append the data to the TextView
+                TextView csvTextView = findViewById(R.id.csvdata);
+                String currentText = csvTextView.getText().toString();
+                csvTextView.setText(currentText + "\n" + csvData);
+
+                // Write the data to the CSV file
+                writeDataToCSVFile(csvData);
                 // You can use the selected file URI to access the chosen file.
                 // For example, you can open and read the file's contents.
             }
@@ -509,4 +550,39 @@ public class alumniView extends AppCompatActivity {
             }
         }
     }
+    private String readCSVFile(Uri fileUri) {
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(fileUri);
+            if (inputStream != null) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append('\n');
+                }
+                inputStream.close();
+                return content.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private void writeDataToCSVFile(String data) {
+        File dir = Environment.getExternalStorageDirectory(); // External storage directory
+        File file = new File(dir, "mydata.csv");
+        Toast.makeText(this, dir.toString(), Toast.LENGTH_SHORT).show();
+        try {
+            FileOutputStream fos = new FileOutputStream(file, true); // Set 'true' to append data
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(fos)));
+            pw.println(data); // Write the data to the file
+            pw.flush();
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error writing to CSV file", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

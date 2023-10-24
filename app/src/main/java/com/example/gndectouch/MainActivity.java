@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                             User user = app.currentUser();
                             mongoClient = user.getMongoClient("mongodb-atlas");
                             mongoDatabase = mongoClient.getDatabase("GNDECdb");
-                            MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor");
+                            MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentor1");
                             MongoCollection<Document> mongoCollection2 = mongoDatabase.getCollection("Mentee");
 
                             Document queryFilter = new Document("email", e);

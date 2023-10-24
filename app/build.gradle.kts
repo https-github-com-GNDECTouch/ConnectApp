@@ -47,6 +47,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-inappmessaging:20.3.5")
     testImplementation("junit:junit:4.13.2")
+    implementation("com.opencsv:opencsv:5.5")
+    implementation("com.nbsp:materialfilepicker:1.9.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("org.tensorflow:tensorflow-lite-support:0.1.0");
