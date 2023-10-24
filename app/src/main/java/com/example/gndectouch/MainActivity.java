@@ -102,10 +102,14 @@ public class MainActivity extends AppCompatActivity {
                                     while (resu.hasNext()) {
 
                                         Document curDoc = resu.next();
-                                        if (curDoc.getString("email") != null && curDoc.getString("email").equals(e)) {
+                                        if (curDoc.getString("email") != null && curDoc.getString("email").equals(e) && curDoc.getString("password").equals(p)) {
                                             //  mentorlist.add(curDoc.getString("name"));
 
                                             Intent intent = new Intent(MainActivity.this, MentorActivity.class);
+                                            intent.putExtra("name",curDoc.getString("name"));
+                                            intent.putExtra("email",curDoc.getString("email"));
+                                            intent.putExtra("id",curDoc.getObjectId("_id"));
+                                            intent.putExtra("phone",curDoc.getString("phone"));
                                             //intent.putStringArrayListExtra("data",mentorlist);
                                             if (user != null) {
                                                 user.logOutAsync(resul -> {
@@ -154,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                                     while (resu.hasNext()) {
 
                                         Document curDoc = resu.next();
-                                        if (curDoc.getString("email") != null && curDoc.getString("email").equals(e)) {
+                                        if (curDoc.getString("email") != null && curDoc.getString("email").equals(e)&& curDoc.getString("password").equals(p)) {
                                             //  mentorlist.add(curDoc.getString("name"));
 
                                             Intent intent = new Intent(MainActivity.this, MenteeActivity.class);

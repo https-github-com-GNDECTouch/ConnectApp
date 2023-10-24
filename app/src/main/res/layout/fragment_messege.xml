@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".MessegeFragment">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:fitsSystemWindows="true">
+
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_margin="30dp">
+
+                <LinearLayout
+
+                    android:id="@+id/messagedb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="textby"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="6dp"
+                            android:text="Hi My Name is Monika!! \n Welcome Students"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:text="12:00p.m"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            tools:ignore="TextSizeCheck"></TextView>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/dummy_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="70dp"
+
+                    android:text="dummy_button" />
+
+                <Button
+
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="close" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>

@@ -1,19 +1,154 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backimg1"
-    tools:context=".MentorActivity">
+    tools:context=".MentorActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="50dp">
+
+        <androidx.appcompat.widget.Toolbar
+
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/white">
+            <!--      <LinearLayout-->
+            <!--          android:layout_width="match_parent"-->
+            <!--          android:layout_height="wrap_content"-->
+            <!--          ></LinearLayout>-->
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+android:background="@color/grey"
+android:layout_marginTop="20dp"
+        android:padding="3dp"
+        android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
-        android:text="Mentor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="vertical"
+     >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            >
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PERSONAL DETAIL"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/grey"
+
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:text="ID:"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="match_parent"
+                android:text="ID of the Mentor"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/grey"
+
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:text="NAME:"
+
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:text="NAME of the Mentor"
+                android:id="@+id/name"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/grey"
+
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:text="EMAIL:"
+
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:text="EMAIL of the Mentor"
+                android:id="@+id/email"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@color/grey"
+
+            android:layout_margin="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="100dp"
+                android:text="PHONE:"
+
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:text="PHONE of the Mentor"
+
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

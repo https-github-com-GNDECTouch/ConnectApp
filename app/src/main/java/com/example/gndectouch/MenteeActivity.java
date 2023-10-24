@@ -3,11 +3,9 @@ package com.example.gndectouch;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.EditText;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,7 +49,7 @@ public class MenteeActivity extends AppCompatActivity {
     // Function to show the chat popup
     private void showChatPopup() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Chat with Mentor");
+        builder.setTitle("Chat with Mentor1");
 
         // Create a layout for the chat content
         View chatLayout = getLayoutInflater().inflate(R.layout.chat_popup, null);
