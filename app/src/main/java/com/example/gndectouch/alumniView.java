@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -333,7 +334,10 @@ public class alumniView extends AppCompatActivity {
         }
         else if (id == R.id.Home) {
             App app = new App(new AppConfiguration.Builder(Appid).build());
-
+            TextView eve=findViewById(R.id.eve);
+            eve.setText("MENTOR LIST");
+            ImageView img=findViewById(R.id.evei);
+            img.setVisibility(View.INVISIBLE);
             app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
                 @Override
                 public void onResult(App.Result<User> resulting) {
@@ -454,6 +458,10 @@ public class alumniView extends AppCompatActivity {
         Document document = new Document("event", "event");
         User user = app.currentUser();
         MongoClient mongoClient = user.getMongoClient("mongodb-atlas");
+        TextView eve=findViewById(R.id.eve);
+        eve.setText("EVENTS");
+        ImageView img=findViewById(R.id.evei);
+        img.setVisibility(View.VISIBLE);
         MongoDatabase mongoDatabase = mongoClient.getDatabase("GNDECdb");
         MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Events");
 
