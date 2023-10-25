@@ -318,8 +318,9 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.chat) {
+            LinearLayout linear = findViewById(R.id.linearlay);
+            linear.removeAllViews();
             Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
-
             MessegeFragment fragment = new MessegeFragment();
             FragmentTransaction transaction =
                     getSupportFragmentManager().beginTransaction();
