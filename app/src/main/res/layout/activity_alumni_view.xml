@@ -78,25 +78,64 @@
         android:id="@+id/frag"
 
         ></FrameLayout>
+    <LinearLayout
+        android:layout_marginHorizontal="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/eve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MENTOR LIST"
 
+            android:textStyle="bold"
+            android:textSize="23dp"
+            android:textColor="@color/cardview_dark_background"
+            />
+        <ImageView
+
+            android:visibility="invisible"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/evei"
+            android:layout_width="40dp"
+            android:layout_height="35dp"
+            app:srcCompat="@drawable/img_2" />
+
+
+    </LinearLayout>
 
     <ScrollView
 
         android:id="@+id/scrollView2"
-        android:layout_width="317dp"
+        android:layout_width="match_parent"
         android:layout_height="347dp"
         android:layout_gravity="center_horizontal"
         android:padding="20dp"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
-        <LinearLayout
-            android:outlineAmbientShadowColor="@color/black"
-            android:id="@+id/linearlay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+
+
+                <LinearLayout
+
+                    android:id="@+id/linearlay"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+            </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout
