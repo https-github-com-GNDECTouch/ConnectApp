@@ -162,6 +162,12 @@ public class MainActivity extends AppCompatActivity {
                                             //  mentorlist.add(curDoc.getString("name"));
 
                                             Intent intent = new Intent(MainActivity.this, MenteeActivity.class);
+
+                                            intent.putExtra("name",curDoc.getString("name"));
+                                            intent.putExtra("email",curDoc.getString("email"));
+                                            intent.putExtra("id",curDoc.getObjectId("_id"));
+                                            intent.putExtra("phone",curDoc.getString("phone"));
+                                            intent.putExtra("mentor",curDoc.getString("mentor"));
                                             //intent.putStringArrayListExtra("data",);
                                             startActivity(intent);
 
