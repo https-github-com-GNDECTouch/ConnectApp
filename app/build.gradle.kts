@@ -52,5 +52,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("org.tensorflow:tensorflow-lite-support:0.1.0");
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0");
+    implementation("com.jjoe64:graphview:4.2.2");
 
 }
