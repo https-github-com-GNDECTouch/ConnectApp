@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class MenteeActivity extends AppCompatActivity {
 
@@ -34,8 +37,33 @@ public class MenteeActivity extends AppCompatActivity {
         personalMailTextView.setText("john.doe@example.com");
         currentSemTextView.setText("Current Semester: 5");
 
-        // Set student performance (you can update this dynamically)
+        // Create a reference to the GraphView
+        GraphView graphView = findViewById(R.id.GraphView);
 
+        // Create a series for the line chart
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
+                new DataPoint(0, 1),
+                new DataPoint(1, 3),
+                new DataPoint(2, 4),
+                new DataPoint(3, 9),
+                new DataPoint(4, 6),
+                new DataPoint(5, 3),
+                new DataPoint(6, 6),
+                new DataPoint(7, 1),
+                new DataPoint(8, 2)
+        });
+
+        // Set a title for the graph view
+        graphView.setTitle("My Graph View");
+
+        // Set text color for the title
+        graphView.setTitleColor(getResources().getColor(R.color.purple_200)); // Use your own color resource
+
+        // Set title text size
+        graphView.setTitleTextSize(18);
+
+        // Add the data series to the graph view
+        graphView.addSeries(series);
 
         // Handle chat button click
         chatButton.setOnClickListener(new View.OnClickListener() {
