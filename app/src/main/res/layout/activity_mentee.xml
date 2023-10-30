@@ -200,7 +200,7 @@
     <ScrollView
         android:id="@+id/scrollVie"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="250dp"
         android:layout_gravity="center_horizontal"
         android:padding="20dp"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
@@ -219,16 +219,7 @@
 
 
 
-    <ImageView
-        android:id="@+id/chatButton"
-        android:layout_width="81dp"
-        android:layout_height="81dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
-        android:padding="16dp"
-        android:src="@drawable/ic_chat"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+
 
             <LinearLayout
 
@@ -241,17 +232,40 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center">
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/GraphView"
-            android:layout_width="380dp"
-            android:layout_height="380dp"
-            tools:layout_editor_absoluteX="12dp" />
-    </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/GraphView"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                tools:layout_editor_absoluteX="12dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/chatButton"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_gravity="right"
+        android:layout_marginEnd="14dp"
+
+        android:padding="6dp"
+        android:src="@drawable/ic_chat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </LinearLayout>

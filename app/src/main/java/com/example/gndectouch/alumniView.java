@@ -248,7 +248,7 @@ public class alumniView extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  openFilePicker1();
+              openFilePicker1();
 
             }
 
@@ -437,19 +437,24 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.upload) {
-            Toast.makeText(this, "Upload", Toast.LENGTH_SHORT).show();
+            LinearLayout linear = findViewById(R.id.linearlay);
+            linear.removeAllViews();
+            Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
+            UploadData fragment = new UploadData();
+            FragmentTransaction transaction =
+                    getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.frag, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
             // Handle item 2 click
-
-
-            uploadData();
-
-
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
     private void uploadData(){
+
 
     }
 

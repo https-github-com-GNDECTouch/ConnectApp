@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UploadData">
+
+    <!-- TODO: Update blank fragment layout -->
+   <LinearLayout
+android:layout_margin="20dp"
+       android:background="@color/grey"
+       android:gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+<TextView
+    android:layout_marginVertical="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textColor="@color/black"
+    android:textSize="16dp"
+    android:gravity="center"
+    android:text="Alot Mentors to Mentee"/>
+       <LinearLayout
+           android:padding="10dp"
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+
+           <Button
+               android:layout_margin="5dp"
+               android:id="@+id/uploadbuttonformentor"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Select Mentor List"/>
+
+
+           <Button
+               android:layout_margin="5dp"
+               android:id="@+id/uploadbuttonformentee"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Select Mentee List"/>
+
+
+
+       </LinearLayout>
+       <Button
+           android:padding="10dp"
+           android:layout_margin="5dp"
+           android:id="@+id/alotmentortomentee"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Alot Mentor"/>
+       <TextView
+           android:id="@+id/resulted"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="alotmentor data"/>
+
+   </LinearLayout>
+
+</FrameLayout>

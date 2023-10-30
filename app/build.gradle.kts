@@ -1,5 +1,4 @@
 @file:Suppress("UNUSED_EXPRESSION", "UNUSED_EXPRESSION")
-
 plugins {
     id("com.android.application")
     //apply plugin of realm
@@ -13,17 +12,14 @@ realm{
 android {
     namespace = "com.example.gndectouch"
     compileSdk = 33
-
     defaultConfig {
         applicationId = "com.example.gndectouch"
         minSdk= 19
         targetSdk= 31
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -39,7 +35,6 @@ android {
         mlModelBinding=true
     }
 }
-
 dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("org.mongodb:mongodb-driver-sync:4.4.0")
@@ -50,8 +45,8 @@ dependencies {
     implementation("com.opencsv:opencsv:5.5")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    implementation("org.tensorflow:tensorflow-lite-support:0.1.0");
+    implementation("org.tensorflow:tensorflow-lite-support:0.1.0")
     implementation("org.tensorflow:tensorflow-lite-metadata:0.1.0");
-    implementation("com.jjoe64:graphview:4.2.2");
-
+    implementation("com.jjoe64:graphview:4.2.2")
+    implementation ("org.apache.commons:commons-math3:3.6.1")
 }
