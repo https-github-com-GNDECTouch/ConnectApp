@@ -120,7 +120,7 @@ TextView resulted=view.findViewById(R.id.resulted);
                 CSVReader studentReader = reader1;
                 String[] studentRow;
                 while ((studentRow = studentReader.readNext()) != null) {
-                    double cgpa = Double.parseDouble(studentRow[1]); // Assuming CGPA is in the first column
+                    double cgpa = Double.parseDouble(studentRow[3]); // Assuming CGPA is in the first column
                     double[] point = {cgpa}; // Create a single-dimensional point
                     studentFeatures.add(new DoublePoint(point));
                 }
@@ -164,10 +164,6 @@ TextView resulted=view.findViewById(R.id.resulted);
             }catch (Exception e) {
                     Toast.makeText(requireContext(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                 }
-
-
-
-
             }
         });
         return view;
