@@ -110,7 +110,7 @@ public class UploadData extends Fragment {
                         double cgpa = Double.parseDouble(studentRow[3]); // Assuming CGPA is in the fourth column
                         double[] point = { cgpa }; // Create a single-dimensional point
                         studentFeatures.add(new DoublePoint(point));
-                        studentNames.add(studentRow[1]); // Assuming student names are in the second column
+                        studentNames.add("         "+studentRow[1]+"    "); // Assuming student names are in the second column
                     }
 
                     CSVReader teacherReader = reader;
@@ -152,6 +152,7 @@ public class UploadData extends Fragment {
                             double cgpa = cgpaList.get(i);
                             result.append("  Student: ").append(studentName).append(", CGPA: ").append(cgpa).append("\n");
                         }
+                        result.append("\n\n");
                     }
                     resulted.setText(result.toString());
                 } catch (Exception e) {

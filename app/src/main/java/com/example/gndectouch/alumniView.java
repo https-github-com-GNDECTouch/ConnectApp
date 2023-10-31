@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -55,13 +56,16 @@ public class alumniView extends AppCompatActivity {
         setContentView(R.layout.activity_alumni_view);
         App app = new App(new AppConfiguration.Builder(Appid).build());
         TextView eve=findViewById(R.id.eve);
-        eve.setVisibility(View.INVISIBLE);
+        eve.setVisibility(View.VISIBLE);
         eve.setText("MENTOR LIST");
+        LinearLayout addevent=findViewById(R.id.addevent);
+        addevent.setVisibility(View.GONE);
 
         app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
             @Override
             public void onResult(App.Result<User> resulting) {
-
+                LinearLayout daa=findViewById(R.id.detailaboutactivity);
+                daa.setVisibility(View.VISIBLE);
 
                 // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
                 //showing mentor data
@@ -158,15 +162,20 @@ public class alumniView extends AppCompatActivity {
         Button addEvent=findViewById(R.id.addEvent);
         addEvent.setOnClickListener(new View.OnClickListener() {
 
+
             @Override
             public void onClick(View v) {
+                LinearLayout daa=findViewById(R.id.detailaboutactivity);
+                daa.setVisibility(View.VISIBLE);
+                FrameLayout frag=findViewById(R.id.frag);
+                frag.setVisibility(View.GONE);
                 app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
                     @Override
                     public void onResult(App.Result<User> resulting) {
 
                         TextView eve=findViewById(R.id.eve);
                         eve.setText("EVENT  LIST");
-                       eve.setVisibility(View.INVISIBLE);
+                       eve.setVisibility(View.GONE);
                         LinearLayout addevent=findViewById(R.id.addevent);
                         addevent.setVisibility(View.VISIBLE);
                         // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
@@ -243,6 +252,10 @@ public class alumniView extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.events) {
+            LinearLayout daa=findViewById(R.id.detailaboutactivity);
+            daa.setVisibility(View.VISIBLE);
+            FrameLayout frag=findViewById(R.id.frag);
+            frag.setVisibility(View.GONE);
             TextView eve=findViewById(R.id.eve);
             eve.setText("EVENT  LIST");
             eve.setVisibility(View.VISIBLE);
@@ -258,11 +271,15 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.chat) {
+            LinearLayout daa=findViewById(R.id.detailaboutactivity);
+            daa.setVisibility(View.GONE);
+            FrameLayout frag=findViewById(R.id.frag);
+            frag.setVisibility(View.VISIBLE);
             TextView eve=findViewById(R.id.eve);
             eve.setText("CHATS HERE");
             eve.setVisibility(View.VISIBLE);
             LinearLayout addevent=findViewById(R.id.addevent);
-            addevent.setVisibility(View.INVISIBLE);
+            addevent.setVisibility(View.GONE);
             LinearLayout linear = findViewById(R.id.linearlay);
             linear.removeAllViews();
             Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
@@ -277,21 +294,26 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.Home) {
+            LinearLayout daa=findViewById(R.id.detailaboutactivity);
+            daa.setVisibility(View.VISIBLE);
+            FrameLayout frag=findViewById(R.id.frag);
+            frag.setVisibility(View.GONE);
             TextView eve=findViewById(R.id.eve);
             eve.setText("MENTOR  LIST");
             eve.setVisibility(View.VISIBLE);
             LinearLayout addevent=findViewById(R.id.addevent);
-            addevent.setVisibility(View.INVISIBLE);
+            addevent.setVisibility(View.GONE);
             App app = new App(new AppConfiguration.Builder(Appid).build());
 
             eve.setText("MENTOR LIST");
             ImageView img=findViewById(R.id.evei);
-            img.setVisibility(View.INVISIBLE);
+            img.setVisibility(View.GONE);
             app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
                 @Override
                 public void onResult(App.Result<User> resulting) {
 
-
+                    FrameLayout frag=findViewById(R.id.frag);
+                    frag.setVisibility(View.GONE);
                     // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
                     //showing mentor data
                     Document document = new Document("occ", "mentor");
@@ -386,11 +408,15 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.upload) {
+            FrameLayout frag=findViewById(R.id.frag);
+            frag.setVisibility(View.VISIBLE);
+            LinearLayout daa=findViewById(R.id.detailaboutactivity);
+            daa.setVisibility(View.GONE);
             TextView eve=findViewById(R.id.eve);
 
-            eve.setVisibility(View.INVISIBLE);
+            eve.setVisibility(View.GONE);
             LinearLayout addevent=findViewById(R.id.addevent);
-            addevent.setVisibility(View.INVISIBLE);
+            addevent.setVisibility(View.GONE);
             LinearLayout linear = findViewById(R.id.linearlay);
             linear.removeAllViews();
             Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
@@ -410,6 +436,8 @@ public class alumniView extends AppCompatActivity {
 
 
     private void loadEventsFromDatabase() {
+        LinearLayout daa=findViewById(R.id.detailaboutactivity);
+        daa.setVisibility(View.VISIBLE);
         App app = new App(new AppConfiguration.Builder(Appid).build());
         Document document = new Document("event", "event");
         User user = app.currentUser();
