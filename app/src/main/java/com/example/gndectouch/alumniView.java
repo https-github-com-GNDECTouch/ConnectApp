@@ -1,11 +1,8 @@
 package com.example.gndectouch;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,23 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import org.bson.Document;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.util.List;
 
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -51,8 +38,7 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 
 public class alumniView extends AppCompatActivity {
-    List<String[]> mentorlist;
-    List<String[]> menteelist;
+
     File myFile;
     private PopupWindow popupWindow;
     TextView mentorname;
@@ -68,6 +54,9 @@ public class alumniView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumni_view);
         App app = new App(new AppConfiguration.Builder(Appid).build());
+        TextView eve=findViewById(R.id.eve);
+        eve.setVisibility(View.INVISIBLE);
+        eve.setText("MENTOR LIST");
 
         app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
             @Override
@@ -175,7 +164,11 @@ public class alumniView extends AppCompatActivity {
                     @Override
                     public void onResult(App.Result<User> resulting) {
 
-
+                        TextView eve=findViewById(R.id.eve);
+                        eve.setText("EVENT  LIST");
+                       eve.setVisibility(View.INVISIBLE);
+                        LinearLayout addevent=findViewById(R.id.addevent);
+                        addevent.setVisibility(View.VISIBLE);
                         // Toast.makeText(alumniView.this, "stap1", Toast.LENGTH_SHORT).show();
 
                         User user = app.currentUser();
@@ -224,16 +217,6 @@ public class alumniView extends AppCompatActivity {
 
 
 
-        Button alotmentor=findViewById(R.id.alotmentor);
-        alotmentor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(filePickerLauncher!=null && filePickerLauncher1!=null)
-                {
-
-                }
-            }
-        });
 
 
 
@@ -243,55 +226,6 @@ public class alumniView extends AppCompatActivity {
 
 
 
-        Button btn=findViewById(R.id.selectFileButton);
-        Button btn1=findViewById(R.id.selectFileButton1);
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              openFilePicker1();
-
-            }
-
-
-        });
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFilePicker();
-            }
-
-
-        });
-
-
-        filePickerLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        Uri selectedFileUri = result.getData().getData();
-                        if (selectedFileUri != null) {
-                            displayFileContent(selectedFileUri);
-                        }
-
-                        // Handle the selected file URI (e.g., upload it to a server).
-                        // For this example, we are not implementing the file upload.
-                    }
-                }
-        );
-        filePickerLauncher1 = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        Uri selectedFileUri = result.getData().getData();
-                        if (selectedFileUri != null) {
-                            displayFileContent1(selectedFileUri);
-                        }
-
-                        // Handle the selected file URI (e.g., upload it to a server).
-                        // For this example, we are not implementing the file upload.
-                    }
-                }
-        );
      //   Realm.init(this);
 
 //        real work
@@ -309,6 +243,11 @@ public class alumniView extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.events) {
+            TextView eve=findViewById(R.id.eve);
+            eve.setText("EVENT  LIST");
+            eve.setVisibility(View.VISIBLE);
+            LinearLayout addevent=findViewById(R.id.addevent);
+            addevent.setVisibility(View.VISIBLE);
             loadEventsFromDatabase();
 
             Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
@@ -319,6 +258,11 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.chat) {
+            TextView eve=findViewById(R.id.eve);
+            eve.setText("CHATS HERE");
+            eve.setVisibility(View.VISIBLE);
+            LinearLayout addevent=findViewById(R.id.addevent);
+            addevent.setVisibility(View.INVISIBLE);
             LinearLayout linear = findViewById(R.id.linearlay);
             linear.removeAllViews();
             Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
@@ -333,8 +277,13 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.Home) {
-            App app = new App(new AppConfiguration.Builder(Appid).build());
             TextView eve=findViewById(R.id.eve);
+            eve.setText("MENTOR  LIST");
+            eve.setVisibility(View.VISIBLE);
+            LinearLayout addevent=findViewById(R.id.addevent);
+            addevent.setVisibility(View.INVISIBLE);
+            App app = new App(new AppConfiguration.Builder(Appid).build());
+
             eve.setText("MENTOR LIST");
             ImageView img=findViewById(R.id.evei);
             img.setVisibility(View.INVISIBLE);
@@ -437,6 +386,11 @@ public class alumniView extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.upload) {
+            TextView eve=findViewById(R.id.eve);
+
+            eve.setVisibility(View.INVISIBLE);
+            LinearLayout addevent=findViewById(R.id.addevent);
+            addevent.setVisibility(View.INVISIBLE);
             LinearLayout linear = findViewById(R.id.linearlay);
             linear.removeAllViews();
             Toast.makeText(this, "Chats", Toast.LENGTH_SHORT).show();
@@ -453,10 +407,7 @@ public class alumniView extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    private void uploadData(){
 
-
-    }
 
     private void loadEventsFromDatabase() {
         App app = new App(new AppConfiguration.Builder(Appid).build());
@@ -599,110 +550,9 @@ public class alumniView extends AppCompatActivity {
 
     }
 
-    private void displayFileContent(Uri fileUri) {
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(fileUri);
-            if (inputStream != null) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder content = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line).append('\n');
-                }
-                inputStream.close();
-                TextView data=findViewById(R.id.csvdata);
-                data.setText(content.toString());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void displayFileContent1(Uri fileUri) {
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(fileUri);
-            if (inputStream != null) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder content = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line).append('\n');
-                }
-                inputStream.close();
-                TextView data=findViewById(R.id.csvdata1);
-                data.setText(content.toString());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    private void openFilePicker() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        filePickerLauncher.launch(intent);
-    }
-    private void openFilePicker1() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");
-        filePickerLauncher1.launch(intent);
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            if (data != null) {
-                Toast.makeText(alumniView.this, "HELLO MONIKA 1", Toast.LENGTH_SHORT).show();
-                Uri selectedFileUri = data.getData();
-                String csvData = readCSVFile(selectedFileUri);
 
-                // Append the data to the TextView
-                TextView csvTextView = findViewById(R.id.csvdata);
-                String currentText = csvTextView.getText().toString();
-                csvTextView.setText(currentText + "\n" + csvData);
 
-                // Write the data to the CSV file
 
-                // You can use the selected file URI to access the chosen file.
-                // For example, you can open and read the file's contents.
-            }
-            else{
-                Toast.makeText(alumniView.this, "Null data", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    private String readCSVFile(Uri fileUri) {
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(fileUri);
-            if (inputStream != null) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder content = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line).append('\n');
-                }
-                inputStream.close();
-                return content.toString();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    private void writeDataToCSVFile(String data) {
-        File dir = Environment.getExternalStorageDirectory(); // External storage directory
-        File file = new File(dir, "mydata.csv");
-        Toast.makeText(this, dir.toString(), Toast.LENGTH_SHORT).show();
-        try {
-            FileOutputStream fos = new FileOutputStream(file, true); // Set 'true' to append data
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(fos)));
-            pw.println(data); // Write the data to the file
-            pw.flush();
-            pw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error writing to CSV file", Toast.LENGTH_SHORT).show();
-        }
-    }
 
 }
