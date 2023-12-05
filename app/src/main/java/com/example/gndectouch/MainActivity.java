@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     LinearLayout loginLayout = findViewById(R.id.loginLayout);
-                    ObjectAnimator animator = ObjectAnimator.ofFloat(loginLayout, "translationY", -loginLayout.getHeight());
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(loginLayout, "translationX", -loginLayout.getWidth());
                     animator.setInterpolator(new AccelerateInterpolator());
                     animator.setDuration(1000); // Adjust the duration as needed
                     // Set up animation listener
