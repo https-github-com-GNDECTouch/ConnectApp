@@ -5,18 +5,18 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
-
-import androidx.appcompat.widget.Toolbar;
-
 
 import org.bson.Document;
 
@@ -35,6 +35,8 @@ public class MenteeActivity extends AppCompatActivity {
     String Appid = "application-0-kdmkx";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Animation an= AnimationUtils.loadAnimation(this,R.anim.translating);TextView eve=findViewById(R.id.eve);
+        eve.startAnimation(an);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentee);
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);

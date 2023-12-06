@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -52,12 +54,14 @@ public class alumniView extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Animation an= AnimationUtils.loadAnimation(this,R.anim.translating);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumni_view);
         App app = new App(new AppConfiguration.Builder(Appid).build());
         TextView eve=findViewById(R.id.eve);
         eve.setVisibility(View.VISIBLE);
         eve.setText("MENTOR LIST");
+eve.startAnimation(an);
         LinearLayout addevent=findViewById(R.id.addevent);
         addevent.setVisibility(View.GONE);
 
@@ -105,7 +109,6 @@ public class alumniView extends AppCompatActivity {
 
                                        itemLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
                                         itemLayout.setOrientation(LinearLayout.VERTICAL);
-                                        itemLayout.setBackgroundColor(getResources().getColor(android.R.color.background_light)); // Change the color as needed
 
 
                                         TextView nameTextView = new TextView(alumniView.this);
@@ -138,7 +141,7 @@ public class alumniView extends AppCompatActivity {
                                         itemLayout.addView(nameTextView);
                                         itemLayout.addView(emailTextView);
                                         itemLayout.addView(phoneTextView);
-
+                                        itemLayout.setBackgroundColor(getResources().getColor(R.color.grey));
                                         linearLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
 
                                         linearLayout.addView(itemLayout);
@@ -175,6 +178,7 @@ public class alumniView extends AppCompatActivity {
 
                         TextView eve=findViewById(R.id.eve);
                         eve.setText("EVENT  LIST");
+                        eve.startAnimation(an);
                        eve.setVisibility(View.GONE);
                         LinearLayout addevent=findViewById(R.id.addevent);
                         addevent.setVisibility(View.VISIBLE);
@@ -353,7 +357,6 @@ public class alumniView extends AppCompatActivity {
 
 
                                             itemLayout.setOrientation(LinearLayout.VERTICAL);
-                                            itemLayout.setBackgroundColor(getResources().getColor(android.R.color.background_light)); // Change the color as needed
 
 
                                             TextView nameTextView = new TextView(alumniView.this);
@@ -387,7 +390,7 @@ public class alumniView extends AppCompatActivity {
                                             itemLayout.addView(emailTextView);
                                             itemLayout.addView(phoneTextView);
 
-
+                                            itemLayout.setBackgroundColor(getResources().getColor(R.color.grey));
                                             linearLayout.addView(itemLayout);
 
                                             // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();

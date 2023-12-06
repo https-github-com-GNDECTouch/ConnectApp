@@ -5,8 +5,8 @@
     <translate android:fromXDelta="0dp"
            android:toXDelta="250"
           android:duration="3000"
-        android:repeatCount="1"
-        android:repeatMode="restart"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
         />
 
 </set>
