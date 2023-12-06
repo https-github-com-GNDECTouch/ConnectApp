@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/backimg">
 
+
    <!-- Content Container -->
    <LinearLayout
-       android:id="@+id/loginLayout"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical"
@@ -19,13 +19,23 @@
           android:layout_width="match_parent"
           android:layout_height="20dp" />
 
+      <!-- Login Text -->
+
       <!-- Username input field -->
+      <!-- Username input field -->
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp" />
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp" />
       <EditText
           android:id="@+id/emailinput"
           android:layout_width="317dp"
           android:layout_height="50dp"
           android:layout_marginTop="20dp"
           android:background="@drawable/custom_edittext_rounded"
+
           android:drawableLeft="@drawable/baseline_person_24"
           android:drawablePadding="8dp"
           android:hint="Username"
@@ -40,6 +50,7 @@
           android:layout_height="50dp"
           android:layout_marginTop="20dp"
           android:background="@drawable/custom_edittext_rounded"
+          
           android:drawableLeft="@drawable/baseline_lock_24"
           android:drawablePadding="8dp"
           android:hint="Password"
@@ -47,6 +58,14 @@
           android:padding="8dp"
           android:textColor="@color/black"
           android:textColorHighlight="@color/cardview_dark_background" />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp" />
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="20dp" />
+
 
       <!-- Spacer View (Adds space before "Forgot Password" and "Guest" buttons) -->
       <Button
@@ -59,6 +78,8 @@
           android:textColor="@color/black"
           android:textSize="18sp"
           app:cornerRadius="20dp" />
+
+
 
       <!-- Forgot Password Button -->
       <Button
