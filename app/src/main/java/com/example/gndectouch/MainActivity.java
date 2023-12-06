@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         //first connect with data base and check which login belong to faculity,mentor or mentee?
 
         App app=new App(new AppConfiguration.Builder(Appid).build());
+        
 
         log.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,12 +60,10 @@ public class MainActivity extends AppCompatActivity {
                 String p=password.getText().toString();
                 if(e.equals("monika8427084@gmail.com")&&p.equals("Monika8427@#"))
                 {
-
-
                     Intent intent=new Intent(MainActivity.this,alumniView.class);
+
                     //intent.putStringArrayListExtra("data",mentorlist);
                     startActivity(intent);
-
 
                 }
                 else {
