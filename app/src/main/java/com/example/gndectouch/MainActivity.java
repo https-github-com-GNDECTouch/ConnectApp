@@ -1,14 +1,10 @@
 package com.example.gndectouch;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -73,38 +69,10 @@ public class MainActivity extends AppCompatActivity {
 =======
 
 
-                    LinearLayout loginLayout = findViewById(R.id.loginLayout);
-                    ObjectAnimator animator = ObjectAnimator.ofFloat(loginLayout, "translationX", -loginLayout.getWidth());
-                    animator.setInterpolator(new AccelerateInterpolator());
-                    animator.setDuration(1000); // Adjust the duration as needed
-                    // Set up animation listener
-                    animator.addListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            // Animation start callback
-                        }
+                    Intent intent=new Intent(MainActivity.this,alumniView.class);
+                    //intent.putStringArrayListExtra("data",mentorlist);
+                    startActivity(intent);
 
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            // Animation end callback
-                            // Start the new activity here
-                            Intent intent = new Intent(MainActivity.this, MentorActivity.class);
-                            startActivity(intent);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-                            // Animation cancel callback
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-                            // Animation repeat callback
-                        }
-                    });
-
-                    // Start the animation
-                    animator.start();
 
 >>>>>>> 4ef8f5df83c266a8889bd38dac4811fae1f0ff1f
                 }
