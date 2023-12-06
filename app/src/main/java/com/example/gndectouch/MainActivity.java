@@ -60,21 +60,17 @@ public class MainActivity extends AppCompatActivity {
                 String p=password.getText().toString();
                 if(e.equals("monika8427084@gmail.com")&&p.equals("Monika8427@#"))
                 {
-<<<<<<< HEAD
+
                     Intent intent=new Intent(MainActivity.this,alumniView.class);
 
                     //intent.putStringArrayListExtra("data",mentorlist);
                     startActivity(intent);
 
-=======
+                    overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
+                   // overridePendingTransition(R.anim.slide_from_bottom,R.anim.slide_to_top);
+                //    overridePendingTransition(R.anim.slide_from_top,R.anim.slide_to_bottom);
 
 
-                    Intent intent=new Intent(MainActivity.this,alumniView.class);
-                    //intent.putStringArrayListExtra("data",mentorlist);
-                    startActivity(intent);
-
-
->>>>>>> 4ef8f5df83c266a8889bd38dac4811fae1f0ff1f
                 }
                 else {
                     Credentials credentials = Credentials.emailPassword("jagjit.2626@gmail.com", "Monika8427@#");

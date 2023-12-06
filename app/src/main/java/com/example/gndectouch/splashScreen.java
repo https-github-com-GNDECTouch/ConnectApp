@@ -26,7 +26,7 @@ public class splashScreen extends AppCompatActivity {
                     imageView.startAnimation(translating);
                     //dar hai bhai
                     //system crash nhi hogi dude relax
-                    sleep( 7000);
+                    sleep( 3000);
                 }catch (Exception e){
                     e.printStackTrace();
                 }finally {
