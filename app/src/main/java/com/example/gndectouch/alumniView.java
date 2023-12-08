@@ -65,6 +65,136 @@ eve.startAnimation(an);
         LinearLayout addevent=findViewById(R.id.addevent);
         addevent.setVisibility(View.GONE);
 
+
+        //searching area
+        //get input by user
+        EditText search=findViewById(R.id.search);
+        String s=search.getText().toString();
+
+        Button searchbtn=findViewById(R.id.searchbtn);
+        searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView eve=findViewById(R.id.eve);
+                eve.setVisibility(View.VISIBLE);
+                eve.setText("STUDENT LIST");
+                eve.startAnimation(an);
+LinearLayout  linearLayout=findViewById(R.id.linearlay);
+linearLayout.removeAllViews();
+
+                Document document = new Document("name", search.getText().toString());
+
+                User user = app.currentUser();
+                mongoClient = user.getMongoClient("mongodb-atlas");
+                mongoDatabase = mongoClient.getDatabase("GNDECdb");
+                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentee");
+                // Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
+                RealmResultTask<MongoCursor<Document>> searchlist= mongoCollection.find(document).iterator();
+
+
+
+                searchlist.getAsync(task ->
+                {
+                    if (task.isSuccess()) {
+                        runOnUiThread(new Runnable() {
+                            @SuppressLint("NewApi")
+                            @Override
+                            public void run() {
+                                LinearLayout linearLayout = findViewById(R.id.linearlay);
+                                linearLayout.removeAllViews();
+                                for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                                    View child = linearLayout.getChildAt(i);
+                                    linearLayout.removeView(child);
+                                }
+                                MongoCursor<Document> resu = task.get();
+                                while (resu.hasNext()) {
+                                    Document curDoc = resu.next();
+                                    if (curDoc.getString("email") != null) {
+                                        LinearLayout itemLayout = new LinearLayout(alumniView.this);
+
+                                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.MATCH_PARENT
+                                        );
+                                        int margin = 16; // Define your margin value here
+                                        layoutParams.setMargins(margin, margin, margin, margin); // left, top, right, bottom
+                                        itemLayout.setLayoutParams(layoutParams);
+
+                                        itemLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
+                                        itemLayout.setOrientation(LinearLayout.VERTICAL);
+
+
+                                        TextView nameTextView = new TextView(alumniView.this);
+                                        nameTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+
+                                        nameTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                        nameTextView.setText("NAME    "+curDoc.getString("name"));
+
+
+                                        TextView emailTextView = new TextView(alumniView.this);
+                                        emailTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+                                        emailTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                        emailTextView.setText("EMAIL  "+curDoc.getString("email"));
+
+
+                                        TextView mentorView = new TextView(alumniView.this);
+                                       mentorView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+                                        mentorView.setTextColor(getResources().getColor(android.R.color.black));
+                                        mentorView.setText("MENTOR  "+curDoc.getString("mentor"));
+
+                                        TextView phoneTextView = new TextView(alumniView.this);
+                                        phoneTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+                                        phoneTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                        phoneTextView.setText("PHONE  "+curDoc.getString("phone"));
+
+
+                                        // Add TextViews to the item's layout
+                                        itemLayout.addView(nameTextView);
+                                        itemLayout.addView(emailTextView);
+                                        itemLayout.addView(phoneTextView);
+                                        itemLayout.addView(mentorView);
+                                        itemLayout.setBackgroundColor(getResources().getColor(R.color.grey));
+                                        linearLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
+
+                                        linearLayout.addView(itemLayout);
+
+                                        // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                }
+                            }
+
+                        });
+                    }
+                });
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
         app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
             @Override
             public void onResult(App.Result<User> resulting) {
@@ -269,10 +399,6 @@ eve.startAnimation(an);
 
             Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
             return true;
-        } else if (id == R.id.logout) {
-            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
-            // Handle item 2 click
-            return true;
         }
         else if (id == R.id.chat) {
             LinearLayout daa=findViewById(R.id.detailaboutactivity);
@@ -432,6 +558,12 @@ eve.startAnimation(an);
 
             // Handle item 2 click
             return true;
+        }
+        else if(id==R.id.logout)
+        {
+            Intent i=new Intent(alumniView.this,MainActivity.class);
+            startActivity(i);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
