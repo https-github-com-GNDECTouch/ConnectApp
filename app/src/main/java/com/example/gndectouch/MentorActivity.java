@@ -181,7 +181,7 @@ public class MentorActivity extends AppCompatActivity {
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflate=getMenuInflater();
-        inflate.inflate(R.menu.menu,menu);
+        inflate.inflate(R.menu.mentormenu,menu);
 
 
 
@@ -198,7 +198,10 @@ public class MentorActivity extends AppCompatActivity {
             Toast.makeText(this, "Events", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.logout) {
-            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(MentorActivity.this,MainActivity.class);
+            startActivity(i);
+finish();
+
             // Handle item 2 click
             return true;
         }
@@ -212,16 +215,7 @@ public class MentorActivity extends AppCompatActivity {
 
             return true;
         }
-        else if (id == R.id.upload) {
-            Toast.makeText(this, "Upload", Toast.LENGTH_SHORT).show();
-            // Handle item 2 click
 
-
-            uploadData();
-
-
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

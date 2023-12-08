@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //intent.putStringArrayListExtra("data",mentorlist);
                     startActivity(intent);
-
+                    finish();
                     overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
                    // overridePendingTransition(R.anim.slide_from_bottom,R.anim.slide_to_top);
                 //    overridePendingTransition(R.anim.slide_from_top,R.anim.slide_to_bottom);
@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                                         // You can perform any additional actions after logout here
                                                         startActivity(intent);
                                                         overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
+                                                        finish();
                                                     } else {
                                                         // Logout failed
                                                         // Handle the error, if necessary
@@ -177,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                                             //intent.putStringArrayListExtra("data",);
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
+                                            finish();
                                             //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
                                             //  TextView text=findViewById(R.id.mentorname);
                                             // text.setText(curDoc.getString("name"));

@@ -41,7 +41,25 @@
                 android:id="@+id/myhome"
 
                 android:orientation="vertical">
+                <LinearLayout
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <EditText
+                        android:id="@+id/search"
+                        android:layout_width="170dp"
+                        android:layout_height="wrap_content"
+                        android:hint="enter name"
+                        tools:ignore="TouchTargetSizeCheck" />
+                    <Button
+                        android:id="@+id/searchbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Search"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:background="@color/grey"
@@ -53,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     >
+
 
                     <EditText
                         android:id="@+id/eventname"

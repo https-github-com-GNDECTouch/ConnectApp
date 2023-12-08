@@ -222,8 +222,6 @@ public class MenteeActivity extends AppCompatActivity {
         MenuInflater inflate=getMenuInflater();
         inflate.inflate(R.menu.menu,menu);
 
-
-
         return true;
     }
     @Override
@@ -238,6 +236,9 @@ public class MenteeActivity extends AppCompatActivity {
             return true;
         } else if (id == R.id.logout) {
             Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            Intent i=new Intent(MenteeActivity.this,MainActivity.class);
+            startActivity(i);
+            finish();
             // Handle item 2 click
             return true;
         }

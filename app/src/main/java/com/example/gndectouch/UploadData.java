@@ -64,7 +64,7 @@ public class UploadData extends Fragment {
                         InputStream inputStream = requireContext().getContentResolver().openInputStream(selectedFileUri);
                         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                         this.reader = new CSVReader(inputStreamReader);
-                       mentorcsv.setText("mentor.csv");
+                        mentorcsv.setText("mentor.csv");
                     } catch (IOException e) {
                         // Handle any IO exceptions.
                     }
@@ -83,7 +83,7 @@ public class UploadData extends Fragment {
                         InputStream inputStream = requireContext().getContentResolver().openInputStream(selectedFileUri);
                         InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                         this.reader1 = new CSVReader(inputStreamReader);
-                       studentcsv.setText("student.csv");
+                        studentcsv.setText("student.csv");
                     } catch (IOException e) {
                         // Handle any IO exceptions.
                     }
@@ -115,20 +115,30 @@ public class UploadData extends Fragment {
                 try {
                     List<DoublePoint> studentFeatures = new ArrayList<>();
                     List<String> studentNames = new ArrayList<>();
+                    List<String> studentemail = new ArrayList<>();
+                    List<String> studentphone = new ArrayList<>();
+                    List<String> studentroll = new ArrayList<>();
                     CSVReader studentReader = reader1;
                     String[] studentRow;
                     boolean skipStudentHeader = true;
+                    int rowCount = 0;
                     while ((studentRow = studentReader.readNext()) != null) {
                         if (skipStudentHeader) {
                             skipStudentHeader = false;
                             continue; // Skip the header row in the student CSV
                         }
+                        rowCount++;
+
+                        //Toast.makeText(requireContext(), studentRow[1]+"  hehe ", Toast.LENGTH_SHORT).show();
                         double cgpa = Double.parseDouble(studentRow[3]); // Assuming CGPA is in the fourth column
                         double[] point = { cgpa }; // Create a single-dimensional point
                         studentFeatures.add(new DoublePoint(point));
-                        studentNames.add("         "+studentRow[1]+"    "); // Assuming student names are in the second column
+                        studentNames.add(studentRow[1]); // Assuming student names are in the second column
+                        studentemail.add(studentRow[5]);
+                        studentphone.add(studentRow[6]);
+                        studentroll.add(studentRow[7]);
                     }
-
+                    Toast.makeText(requireContext(), rowCount+" number of rows", Toast.LENGTH_SHORT).show();
                     CSVReader teacherReader = reader;
                     String[] teacherRow;
                     List<String> teacherNames = new ArrayList<>();
@@ -147,6 +157,7 @@ public class UploadData extends Fragment {
                     List<CentroidCluster<DoublePoint>> clusters = clusterer.cluster(studentFeatures);
 
                     HashMap<String, List<Double>> teacherAssignments = new HashMap<>();
+                    
                     for (int i = 0; i < clusters.size(); i++) {
                         CentroidCluster<DoublePoint> cluster = clusters.get(i);
                         String teacherName = teacherNames.get(i);
@@ -164,17 +175,23 @@ public class UploadData extends Fragment {
 
                     CSVWriter writer = new CSVWriter(new FileWriter(outputFile));
                     try {
-
-                        for (String teacher : teacherAssignments.keySet()) {
+                            for (String teacher : teacherAssignments.keySet()) {
                             List<String[]> data = new ArrayList<>();
 
                             List<Double> cgpaList = teacherAssignments.get(teacher);
                             List<String> studentNameList = studentNames.subList(0, cgpaList.size());
+                            List<String> studentNameList1 = studentphone.subList(0, cgpaList.size());
+                            List<String> studentNameList2 = studentemail.subList(0, cgpaList.size());
+                            List<String> studentNameList3 = studentroll.subList(0, cgpaList.size());
+
 
                             for (int i = 0; i < cgpaList.size(); i++) {
                                 String studentName = studentNameList.get(i);
+                                String studentName1 = studentNameList1.get(i);
+                                String studentName2 = studentNameList2.get(i);
+                                String studentName3 = studentNameList3.get(i);
                                 double cgpa = cgpaList.get(i);
-                                data.add(new String[]{teacher, studentName, Double.toString(cgpa)});
+                                data.add(new String[]{teacher, studentName,studentName1,studentName2,studentName3, Double.toString(cgpa)});
                             }
 
                             // Write data to the CSV file without overwriting existing content
