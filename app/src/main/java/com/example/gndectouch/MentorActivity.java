@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,8 @@ public class MentorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentor);
+        Animation an= AnimationUtils.loadAnimation(this,R.anim.translating);TextView eve=findViewById(R.id.eve);
+        eve.startAnimation(an);
         Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(tb);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -155,6 +159,7 @@ public class MentorActivity extends AppCompatActivity {
 
                                 itemLayout.addView(nameTextView);
                                 itemLayout.addView(emailTextView);
+
                                 itemLayout.addView(phoneTextView);
 
                                 linearLayout.addView(itemLayout);

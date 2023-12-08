@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                                                         // Logout was successful
                                                         // You can perform any additional actions after logout here
                                                         startActivity(intent);
+                                                        overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
                                                     } else {
                                                         // Logout failed
                                                         // Handle the error, if necessary
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                                             intent.putExtra("mentor",curDoc.getString("mentor"));
                                             //intent.putStringArrayListExtra("data",);
                                             startActivity(intent);
-
+                                            overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
                                             //Toast.makeText(MainActivity.this, curDoc.getString("name"), Toast.LENGTH_SHORT).show();
                                             //  TextView text=findViewById(R.id.mentorname);
                                             // text.setText(curDoc.getString("name"));

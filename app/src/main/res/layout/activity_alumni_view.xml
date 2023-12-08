@@ -44,6 +44,7 @@
 
 
                 <LinearLayout
+                    android:background="@color/grey"
                     android:visibility="invisible"
                     android:id="@+id/addevent"
                     android:layout_margin="22dp"
@@ -93,6 +94,7 @@
                     android:layout_marginHorizontal="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
                     <TextView
 
@@ -101,14 +103,16 @@
                         android:layout_height="wrap_content"
                         android:text="MENTOR LIST"
 
+                        android:shadowColor="@color/light_blue_600"
+                        android:shadowRadius="10"
                         android:textStyle="bold"
                         android:textSize="23dp"
-                        android:textColor="@color/cardview_dark_background"
+                        android:textColor="@color/head"
                         />
                     <ImageView
 
                         android:visibility="invisible"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="180dp"
                         android:id="@+id/evei"
                         android:layout_width="40dp"
                         android:layout_height="35dp"
