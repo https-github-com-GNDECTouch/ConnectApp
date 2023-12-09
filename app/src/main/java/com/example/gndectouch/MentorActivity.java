@@ -1,12 +1,16 @@
 package com.example.gndectouch;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.bson.Document;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import io.realm.Realm;
 import io.realm.mongodb.App;
@@ -29,6 +37,9 @@ import io.realm.mongodb.mongo.iterable.MongoCursor;
 
 public class MentorActivity extends AppCompatActivity {
     String Appid = "application-0-kdmkx";
+    MongoDatabase mongoDatabase;
+    MongoClient mongoClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +65,142 @@ public class MentorActivity extends AppCompatActivity {
         TextView i = findViewById(R.id.id);
         TextView p = findViewById(R.id.phone);
 
+        App app = new App(new AppConfiguration.Builder(Appid).build());
+
+
+
+        //searching
+        EditText search_me=findViewById(R.id.search_me);
+        Button search_btn=findViewById(R.id.search_btn);
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = search_me.getText().toString();
+
+// Construct the regex query string
+                String regexQuery = ".*" + Pattern.quote(searchText)+".*";
+
+                LinearLayout  linearLayout=findViewById(R.id.outputsearch);
+                linearLayout.removeAllViews();
+
+                Document document = new Document("name", new Document("$regex",regexQuery));
+
+                Document mentor_name = new Document("mentor", name); // Replace 123 with the actual rollnumber
+
+// Combine both queries using the $and operator
+                List<Document> andQuery = Arrays.asList(document, mentor_name);
+                Document finalQuery = new Document("$and", andQuery);
+
+                User user = app.currentUser();
+                mongoClient = user.getMongoClient("mongodb-atlas");
+                mongoDatabase = mongoClient.getDatabase("GNDECdb");
+                MongoCollection<Document> mongoCollection = mongoDatabase.getCollection("Mentee");
+                // Toast.makeText(alumniView.this, "stap2 hello ", Toast.LENGTH_SHORT).show();
+                RealmResultTask<MongoCursor<Document>> searchlist= mongoCollection.find(finalQuery).iterator();
+
+
+
+                searchlist.getAsync(task ->
+                {
+                    if (task.isSuccess()) {
+                        runOnUiThread(new Runnable() {
+                            @SuppressLint("NewApi")
+                            @Override
+                            public void run() {
+                                LinearLayout linearLayout = findViewById(R.id.outputsearch);
+                                linearLayout.removeAllViews();
+                                for (int i = 0; i < linearLayout.getChildCount(); i++) {
+                                    View child = linearLayout.getChildAt(i);
+                                    linearLayout.removeView(child);
+                                }
+                                MongoCursor<Document> resu = task.get();
+                                while (resu.hasNext()) {
+                                    Document curDoc = resu.next();
+                                    if (curDoc.getString("email") != null) {
+                                        LinearLayout itemLayout = new LinearLayout(MentorActivity.this);
+
+                                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.MATCH_PARENT
+                                        );
+                                        int margin = 16; // Define your margin value here
+                                        layoutParams.setMargins(margin, margin, margin, margin); // left, top, right, bottom
+                                        itemLayout.setLayoutParams(layoutParams);
+
+                                        itemLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
+                                        itemLayout.setOrientation(LinearLayout.VERTICAL);
+
+
+                                        TextView nameTextView = new TextView(MentorActivity.this);
+                                        nameTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+
+                                        nameTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                        nameTextView.setText("NAME    " + curDoc.getString("name"));
+
+
+                                        TextView emailTextView = new TextView(MentorActivity.this);
+                                        emailTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+                                        emailTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                        emailTextView.setText("EMAIL  " + curDoc.getString("email"));
+
+
+                                        TextView mentorView = new TextView(MentorActivity.this);
+                                        mentorView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+                                        mentorView.setTextColor(getResources().getColor(android.R.color.black));
+                                        mentorView.setText("MENTOR  " + curDoc.getString("mentor"));
+
+                                        TextView phoneTextView = new TextView(MentorActivity.this);
+                                        phoneTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                                LinearLayout.LayoutParams.WRAP_CONTENT
+                                        ));
+                                        phoneTextView.setTextColor(getResources().getColor(android.R.color.black));
+                                        phoneTextView.setText("PHONE  " + curDoc.getString("phone"));
+
+
+                                        // Add TextViews to the item's layout
+                                        itemLayout.addView(nameTextView);
+                                        itemLayout.addView(emailTextView);
+                                        itemLayout.addView(phoneTextView);
+                                        itemLayout.addView(mentorView);
+                                        itemLayout.setBackgroundColor(getResources().getColor(R.color.grey));
+                                        linearLayout.setOutlineSpotShadowColor(getResources().getColor(android.R.color.black));
+
+                                        linearLayout.addView(itemLayout);
+
+                                        // Toast.makeText(alumniView.this, curDoc.getString("email"), Toast.LENGTH_SHORT).show();
+
+                                    }
+
+                                }
+                            }
+
+                        });
+                    };
+                });
+
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
 // Check if the intent extras are not null before setting the text
         if (name != null) {
             n.setText(name);
@@ -67,7 +214,7 @@ public class MentorActivity extends AppCompatActivity {
         if (phone != null) {
             p.setText(phone);
         }
-        App app = new App(new AppConfiguration.Builder(Appid).build());
+
 
         app.loginAsync(Credentials.emailPassword("monika8427084@gmail.com", "Monika8427@#"), new App.Callback<User>() {
             @Override

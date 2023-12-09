@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 import org.bson.Document;
 
 import java.io.File;
+import java.util.regex.Pattern;
 
 import io.realm.mongodb.App;
 import io.realm.mongodb.AppConfiguration;
@@ -75,6 +76,20 @@ eve.startAnimation(an);
         searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Document document = new Document("name", search.getText().toString().trim());
+                try {
+                    String searchText = search.getText().toString();
+                    String regexQuery = ".*" + Pattern.quote(searchText)+".*";
+
+                    document = new Document("name", new Document("$regex", regexQuery).append("$options", "i"));
+
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(alumniView.this, "hie "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+               // Bson regexFilter = Filters.regex("name",".*"+search.getText().toString().trim()+".*", "i");
+
                 TextView eve=findViewById(R.id.eve);
                 eve.setVisibility(View.VISIBLE);
                 eve.setText("STUDENT LIST");
@@ -82,7 +97,8 @@ eve.startAnimation(an);
 LinearLayout  linearLayout=findViewById(R.id.linearlay);
 linearLayout.removeAllViews();
 
-                Document document = new Document("name", search.getText().toString());
+
+                //Document document = (Document) Filters.regex("name", "^"+search.getText().toString().trim(),"i");
 
                 User user = app.currentUser();
                 mongoClient = user.getMongoClient("mongodb-atlas");
